@@ -1,0 +1,16 @@
+ItemGroupUsersTypes:
+    type: object
+    config:
+        fields:
+            editor:
+                type: EditorItemType
+                resolve: '@=query("ContentType", {"identifier": "editor"})'
+            customer:
+                type: CustomerItemType
+                resolve: '@=query("ContentType", {"identifier": "customer"})'
+            user:
+                type: UserItemType
+                resolve: '@=query("ContentType", {"identifier": "user"})'
+            userGroup:
+                type: UserGroupItemType
+                resolve: '@=query("ContentType", {"identifier": "user_group"})'

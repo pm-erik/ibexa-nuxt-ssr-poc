@@ -1,0 +1,32 @@
+-   type: content
+    mode: create
+    metadata:
+        contentType: user_group
+        alwaysAvailable: true
+        mainTranslation: eng-GB
+        remoteId: ibexa_customer_group
+    location:
+        parentLocationId: 5
+        locationRemoteId: ibexa_customer_group_location
+        hidden: false
+        sortField: !php/const Ibexa\Contracts\Core\Repository\Values\Content\Location::SORT_FIELD_NAME
+        sortOrder: ASC
+        priority: 0
+    fields:
+        -   fieldDefIdentifier: name
+            fieldTypeIdentifier: ezstring
+            languageCode: eng-GB
+            value: 'Customers'
+        -   fieldDefIdentifier: description
+            fieldTypeIdentifier: ezstring
+            languageCode: eng-GB
+            value: 'Private Clients'
+    references:
+        -   name: ref__checkout__customers_user_group__location_id
+            type: location_id
+        -   name: ref__checkout__customers_user_group__content_id
+            type: content_id
+
+-   type: reference
+    mode: save
+    filename: references/customer_group_references.yml

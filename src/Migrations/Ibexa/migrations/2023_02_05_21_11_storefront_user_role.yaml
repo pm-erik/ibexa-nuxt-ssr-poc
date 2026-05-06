@@ -1,0 +1,59 @@
+-
+    type: role
+    mode: create
+    metadata:
+        identifier: 'Storefront User'
+    policies:
+        -
+            module: product_type
+            function: view
+        -
+            module: product
+            function: view
+        -
+            module: catalog
+            function: view
+        -
+            module: checkout
+            function: view
+        -
+            module: checkout
+            function: create
+        -
+            module: checkout
+            function: update
+        -
+            module: checkout
+            function: delete
+        -
+            module: cart
+            function: view
+            limitations:
+                -
+                    identifier: CartOwner
+                    values: [self]
+        -
+            module: cart
+            function: create
+            limitations:
+                -
+                    identifier: CartOwner
+                    values: [self]
+        -
+            module: cart
+            function: edit
+            limitations:
+                -
+                    identifier: CartOwner
+                    values: [self]
+        -
+            module: cart
+            function: delete
+            limitations:
+                -
+                    identifier: CartOwner
+                    values: [self]
+    actions:
+        -   action: assign_role_to_user_group
+            value:
+                id: 10

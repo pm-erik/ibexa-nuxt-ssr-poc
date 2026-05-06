@@ -1,0 +1,30 @@
+ProductCategoryTagItem:
+    type: object
+    inherits:
+        - AbstractItem
+    config:
+        interfaces:
+            - Item
+            - Node
+        fields:
+            name:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "name", args)'
+                args:
+                    language: { type: RepositoryLanguage }
+            identifier:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "identifier", args)'
+            parent:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "parent", args)'
+            description:
+                type: RichTextFieldValue
+                resolve: '@=query("ItemFieldValue", value, "description", args)'
+                args:
+                    language: { type: RepositoryLanguage }
+            image:
+                type: ImageFieldValue
+                resolve: '@=query("DomainImageAssetFieldValue", [query("ItemFieldValue", value, "image", args)])'
+                args:
+                    language: { type: RepositoryLanguage }

@@ -1,0 +1,31 @@
+-
+    type: role
+    mode: update
+    match:
+        field: identifier
+        value: Member
+    metadata:
+        identifier: Member
+    policies:
+        mode: append
+        list:
+            -
+                module: shipment
+                function: view
+                limitations:
+                    - { identifier: ShipmentOwner, values: [self] }
+            -
+                module: shipment
+                function: create
+                limitations:
+                    - { identifier: ShipmentOwner, values: [self] }
+            -
+                module: shipment
+                function: edit
+                limitations:
+                    - { identifier: ShipmentOwner, values: [self] }
+            -
+                module: shipment
+                function: delete
+                limitations:
+                    - { identifier: ShipmentOwner, values: [self] }

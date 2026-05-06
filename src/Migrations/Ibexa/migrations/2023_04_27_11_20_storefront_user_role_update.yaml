@@ -1,0 +1,42 @@
+-   type: role
+    mode: update
+    match:
+        field: identifier
+        value: 'Storefront User'
+    policies:
+        mode: append
+        list:
+            -
+                module: payment_method
+                function: view
+            -
+                module: shipping_method
+                function: view
+            -
+                module: shipment
+                function: create
+                limitations:
+                    - { identifier: ShipmentOwner, values: [self] }
+            -
+                module: shipment
+                function: view
+                limitations:
+                    - { identifier: ShipmentOwner, values: [self] }
+            -
+                module: payment
+                function: create
+            -
+                module: payment
+                function: view
+                limitations:
+                    - { identifier: PaymentOwner, values: [ self ] }
+            -
+                module: order
+                function: create
+                limitations:
+                    - { identifier: OrderOwner, values: [self] }
+            -
+                module: order
+                function: view
+                limitations:
+                    - { identifier: OrderOwner, values: [self] }

@@ -1,0 +1,12 @@
+RecentOrdersPageBlock:
+    type: object
+    inherits:
+        - BasePageBlock
+    config:
+        fields:
+            statuses:
+                type: String
+                resolve: '@=value.getAttribute("statuses").getValue()'
+            limit:
+                type: Int
+                resolve: '@=value.getAttribute("limit").getValue()'

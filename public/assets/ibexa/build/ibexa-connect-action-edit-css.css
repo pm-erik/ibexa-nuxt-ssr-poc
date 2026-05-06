@@ -1,0 +1,23 @@
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@symfony/webpack-encore/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[1].use[1]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[4].oneOf[1].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[1].use[3]!./vendor/ibexa/connect/src/bundle/Resources/public/scss/ibexa-connect-action-edit.scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.ibexa-connect-action-edit-handler-actions {
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  margin: 2rem 0;
+}
+.ibexa-connect-action-edit-handler-actions__action--go-to-connect .ibexa-icon {
+  margin-left: 0.5rem;
+}
+
+.ibexa-connect-action-edit-handler-options__row {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+.ibexa-connect-action-edit-handler-options__row .ibexa-dropdown {
+  width: 23rem;
+}
+.ibexa-connect-action-edit-handler-options__row-group--selector {
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}

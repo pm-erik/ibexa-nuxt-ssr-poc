@@ -1,0 +1,31 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@symfony/webpack-encore/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[1].use[1]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[4].oneOf[1].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[1].use[3]!./vendor/ibexa/shipping/src/bundle/Resources/public/scss/ibexa-shipment-view.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.ibexa-shipment-view-tab-summary {
+  margin-top: 0.875rem;
+}
+.ibexa-shipment-view-tab-summary__stats {
+  display: flex;
+  gap: 1.5rem;
+}
+.ibexa-shipment-view-tab-summary__details-grid {
+  display: grid;
+  grid-template-areas: "basic-information addresses" "customer-details addresses";
+  gap: 1.5rem;
+  margin-top: 2.0625rem;
+}
+.ibexa-shipment-view-tab-summary__details-wrapper {
+  border: 0.0625rem solid #ececf1;
+  border-radius: 0.625rem;
+  padding: 1.5rem 1.5rem 2.0625rem 1.5rem;
+}
+.ibexa-shipment-view-tab-summary__details-wrapper--basic-information {
+  grid-area: basic-information;
+  background: #fbfbfc;
+}
+.ibexa-shipment-view-tab-summary__details-outer-wrapper--addresses {
+  grid-area: addresses;
+}
+.ibexa-shipment-view-tab-summary .ibexa-details__item-content {
+  display: flex;
+}

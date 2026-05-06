@@ -1,0 +1,18 @@
+OrdersPageBlock:
+    type: object
+    inherits:
+        - BasePageBlock
+    config:
+        fields:
+            columns:
+                type: String
+                resolve: '@=value.getAttribute("columns").getValue()'
+            statuses:
+                type: String
+                resolve: '@=value.getAttribute("statuses").getValue()'
+            limit:
+                type: Int
+                resolve: '@=value.getAttribute("limit").getValue()'
+            sorting:
+                type: String
+                resolve: '@=value.getAttribute("sorting").getValue()'

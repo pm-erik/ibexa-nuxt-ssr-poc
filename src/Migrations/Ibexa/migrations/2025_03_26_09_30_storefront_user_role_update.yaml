@@ -1,0 +1,36 @@
+-   type: role
+    mode: update
+    match:
+        field: identifier
+        value: 'Storefront User'
+    policies:
+        mode: append
+        list:
+            -
+                module: user
+                function: login
+                limitations:
+                    - { identifier: SiteAccess, values: [site] }
+            -
+                module: content
+                function: read
+                limitations:
+                    # location id=2 needed for ibexa_path(ibexa.rootLocation)
+                    - { identifier: Node, values: [2] }
+
+            -   module: content
+                function: read
+                limitations:
+                    # product-catalog node and its successors
+                    - { identifier: Subtree, values: [/1/60/] }
+
+            -   module: taxonomy
+                function: read
+                limitations:
+                    - { identifier: Taxonomy, values: [product_categories] }
+
+            -   module: content
+                function: read
+                limitations:
+                    - { identifier: Class, values: [image] }
+                    - { identifier: Subtree, values: [/1/43/] }

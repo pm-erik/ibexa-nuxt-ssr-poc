@@ -1,0 +1,42 @@
+ArticleItem:
+    type: object
+    inherits:
+        - AbstractItem
+    config:
+        interfaces:
+            - Item
+            - Node
+        fields:
+            title:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "title", args)'
+                args:
+                    language: { type: RepositoryLanguage }
+            shortTitle:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "short_title", args)'
+                args:
+                    language: { type: RepositoryLanguage }
+            author:
+                type: '[AuthorFieldValue]'
+                resolve: '@=query("ItemFieldValue", value, "author", args) !== null ? query("ItemFieldValue", value, "author", args).authors : null'
+                args:
+                    language: { type: RepositoryLanguage }
+            intro:
+                type: RichTextFieldValue
+                resolve: '@=query("ItemFieldValue", value, "intro", args)'
+                args:
+                    language: { type: RepositoryLanguage }
+            body:
+                type: RichTextFieldValue
+                resolve: '@=query("ItemFieldValue", value, "body", args)'
+                args:
+                    language: { type: RepositoryLanguage }
+            enableComments:
+                type: Boolean
+                resolve: '@=query("ItemFieldValue", value, "enable_comments", args) !== null ? query("ItemFieldValue", value, "enable_comments", args).bool : null'
+            image:
+                type: Item
+                resolve: '@=query("RelationFieldValue", query("ItemFieldValue", value, "image", args), false, args)'
+                args:
+                    language: { type: RepositoryLanguage }

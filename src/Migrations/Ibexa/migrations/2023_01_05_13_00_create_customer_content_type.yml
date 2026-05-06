@@ -1,0 +1,154 @@
+-
+    type: content_type
+    mode: create
+    metadata:
+        identifier: customer
+        mainTranslation: eng-GB
+        urlAliasSchema: null
+        nameSchema: '<first_name> <last_name>'
+        container: false
+        defaultAlwaysAvailable: true
+        defaultSortField: 1
+        defaultSortOrder: 1
+        contentTypeGroups:
+            - Users
+        translations:
+            eng-GB:
+                name: Customer
+    fields:
+        -
+            identifier: first_name
+            type: ezstring
+            position: 1
+            translations:
+                eng-GB:
+                    name: 'First name'
+            required: true
+            searchable: true
+            infoCollector: false
+            translatable: true
+            category: ''
+            defaultValue: null
+            fieldSettings: {  }
+            validatorConfiguration:
+                StringLengthValidator:
+                    maxStringLength: 255
+                    minStringLength: null
+        -
+            identifier: last_name
+            type: ezstring
+            position: 2
+            translations:
+                eng-GB:
+                    name: 'Last name'
+            required: true
+            searchable: true
+            infoCollector: false
+            translatable: true
+            category: ''
+            defaultValue: null
+            fieldSettings: {  }
+            validatorConfiguration:
+                StringLengthValidator:
+                    maxStringLength: 255
+                    minStringLength: null
+        -
+            identifier: user_account
+            type: ezuser
+            position: 3
+            translations:
+                eng-GB:
+                    name: 'User account'
+            required: true
+            searchable: false
+            infoCollector: false
+            translatable: false
+            category: ''
+            defaultValue: null
+            fieldSettings:
+                PasswordTTL: 0
+                PasswordTTLWarning: 0
+                RequireUniqueEmail: false
+                UsernamePattern: '^[^@]+$'
+            validatorConfiguration:
+                PasswordValueValidator:
+                    requireAtLeastOneUpperCaseCharacter: true
+                    requireAtLeastOneLowerCaseCharacter: true
+                    requireAtLeastOneNumericCharacter: true
+                    requireAtLeastOneNonAlphanumericCharacter: false
+                    requireNewPassword: false
+                    minLength: 10
+        -
+            identifier: image
+            type: ezimage
+            position: 5
+            translations:
+                eng-GB:
+                    name: Image
+            required: false
+            searchable: false
+            infoCollector: false
+            translatable: true
+            category: ''
+            defaultValue: null
+            fieldSettings: {  }
+            validatorConfiguration:
+                FileSizeValidator:
+                    maxFileSize: 10
+                AlternativeTextValidator:
+                    required: false
+            thumbnail: false
+        -
+            identifier: billing_address
+            type: ibexa_address
+            position: 9
+            translations:
+                eng-GB:
+                    name: 'Billing address'
+                    description: ''
+            required: false
+            searchable: false
+            infoCollector: false
+            translatable: false
+            category: 'address'
+            fieldSettings:
+                type: billing
+        -
+            identifier: shipping_address
+            type: ibexa_address
+            position: 9
+            translations:
+                eng-GB:
+                    name: 'Shipping address'
+                    description: ''
+            required: false
+            searchable: false
+            infoCollector: false
+            translatable: false
+            category: 'address'
+            fieldSettings:
+                type: shipping
+        -
+            identifier: customer_group
+            type: ibexa_customer_group
+            position: 5
+            translations:
+                eng-GB:
+                    name: 'Customer group'
+                    description: ''
+            required: false
+            searchable: false
+            infoCollector: false
+            translatable: false
+            category: 'basic_information'
+            defaultValue: ''
+            fieldSettings: { }
+            validatorConfiguration: { }
+    references:
+        -
+            name: ref__customer__content_type_id
+            type: content_type_id
+
+-   type: reference
+    mode: save
+    filename: references/customer_references.yml

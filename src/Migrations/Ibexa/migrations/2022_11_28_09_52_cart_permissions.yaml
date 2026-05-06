@@ -1,0 +1,31 @@
+-
+    type: role
+    mode: update
+    match:
+        field: identifier
+        value: Member
+    metadata:
+        identifier: Member
+    policies:
+        mode: append
+        list:
+            -
+                module: cart
+                function: view
+                limitations:
+                    - { identifier: CartOwner, values: [self] }
+            -
+                module: cart
+                function: create
+                limitations:
+                    - { identifier: CartOwner, values: [self] }
+            -
+                module: cart
+                function: edit
+                limitations:
+                    - { identifier: CartOwner, values: [self] }
+            -
+                module: cart
+                function: delete
+                limitations:
+                    - { identifier: CartOwner, values: [self] }

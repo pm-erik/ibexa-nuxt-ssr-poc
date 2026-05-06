@@ -1,0 +1,12 @@
+OrdersByStatusPageBlock:
+    type: object
+    inherits:
+        - BasePageBlock
+    config:
+        fields:
+            statuses:
+                type: String
+                resolve: '@=value.getAttribute("statuses").getValue()'
+            periods:
+                type: String
+                resolve: '@=value.getAttribute("periods").getValue()'

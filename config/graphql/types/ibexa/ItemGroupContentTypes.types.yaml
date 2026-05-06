@@ -1,0 +1,22 @@
+ItemGroupContentTypes:
+    type: object
+    config:
+        fields:
+            article:
+                type: ArticleItemType
+                resolve: '@=query("ContentType", {"identifier": "article"})'
+            folder:
+                type: FolderItemType
+                resolve: '@=query("ContentType", {"identifier": "folder"})'
+            form:
+                type: FormItemType
+                resolve: '@=query("ContentType", {"identifier": "form"})'
+            tag:
+                type: TagItemType
+                resolve: '@=query("ContentType", {"identifier": "tag"})'
+            landingPage:
+                type: LandingPageItemType
+                resolve: '@=query("ContentType", {"identifier": "landing_page"})'
+            productCategoryTag:
+                type: ProductCategoryTagItemType
+                resolve: '@=query("ContentType", {"identifier": "product_category_tag"})'

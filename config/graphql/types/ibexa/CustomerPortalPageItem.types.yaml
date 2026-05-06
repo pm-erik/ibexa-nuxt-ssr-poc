@@ -1,0 +1,20 @@
+CustomerPortalPageItem:
+    type: object
+    inherits:
+        - AbstractItem
+    config:
+        interfaces:
+            - Item
+            - Node
+        fields:
+            name:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "name", args)'
+            description:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "description", args)'
+            page:
+                type: Page
+                resolve: '@=query("Page", query("ItemFieldValue", value, "page", args), context)'
+                args:
+                    language: { type: RepositoryLanguage }

@@ -1,0 +1,18 @@
+CustomerItemUpdateInput:
+    type: input-object
+    config:
+        fields:
+            firstName:
+                type: String
+            lastName:
+                type: String
+            userAccount:
+                type: String
+            image:
+                type: ImageFieldInput
+            customerGroup:
+                type: String
+            billingAddress:
+                type: String
+            shippingAddress:
+                type: String

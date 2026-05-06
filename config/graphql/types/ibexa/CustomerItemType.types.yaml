@@ -1,0 +1,29 @@
+CustomerItemType:
+    type: object
+    inherits:
+        - BaseItemType
+    config:
+        interfaces:
+            - ItemType
+        fields:
+            firstName:
+                type: TextLineFieldDefinition
+                resolve: '@=value.getFieldDefinition("first_name")'
+            lastName:
+                type: TextLineFieldDefinition
+                resolve: '@=value.getFieldDefinition("last_name")'
+            userAccount:
+                type: MatrixFieldDefinition
+                resolve: '@=value.getFieldDefinition("user_account")'
+            image:
+                type: BinaryFieldDefinition
+                resolve: '@=value.getFieldDefinition("image")'
+            customerGroup:
+                type: MatrixFieldDefinition
+                resolve: '@=value.getFieldDefinition("customer_group")'
+            billingAddress:
+                type: MatrixFieldDefinition
+                resolve: '@=value.getFieldDefinition("billing_address")'
+            shippingAddress:
+                type: MatrixFieldDefinition
+                resolve: '@=value.getFieldDefinition("shipping_address")'

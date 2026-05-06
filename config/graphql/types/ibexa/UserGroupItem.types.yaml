@@ -1,0 +1,19 @@
+UserGroupItem:
+    type: object
+    inherits:
+        - AbstractItem
+    config:
+        interfaces:
+            - Item
+            - Node
+        fields:
+            name:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "name", args)'
+                args:
+                    language: { type: RepositoryLanguage }
+            description:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "description", args)'
+                args:
+                    language: { type: RepositoryLanguage }

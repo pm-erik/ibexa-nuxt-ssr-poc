@@ -1,0 +1,31 @@
+-
+    type: role
+    mode: update
+    match:
+        field: identifier
+        value: Member
+    metadata:
+        identifier: Member
+    policies:
+        mode: append
+        list:
+            -
+                module: order
+                function: view
+                limitations:
+                    - { identifier: OrderOwner, values: [self] }
+            -
+                module: order
+                function: create
+                limitations:
+                    - { identifier: OrderOwner, values: [self] }
+            -
+                module: order
+                function: update
+                limitations:
+                    - { identifier: OrderOwner, values: [self] }
+            -
+                module: order
+                function: cancel
+                limitations:
+                    - { identifier: OrderOwner, values: [self] }

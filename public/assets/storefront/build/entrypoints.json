@@ -1,0 +1,60 @@
+{
+  "entrypoints": {
+    "ibexa-storefront-css": {
+      "css": [
+        "/assets/storefront/build/ibexa-storefront-css.css"
+      ],
+      "js": [
+        "/assets/storefront/build/ibexa-storefront-css.js"
+      ]
+    },
+    "ibexa-storefront-security-css": {
+      "css": [
+        "/assets/storefront/build/ibexa-storefront-security-css.css"
+      ],
+      "js": [
+        "/assets/storefront/build/ibexa-storefront-security-css.js"
+      ]
+    },
+    "ibexa-storefront-js": {
+      "js": [
+        "/assets/storefront/build/ibexa-storefront-js.js"
+      ]
+    },
+    "ibexa-storefront-security-js": {
+      "js": [
+        "/assets/storefront/build/ibexa-storefront-security-js.js"
+      ]
+    },
+    "ibexa-storefront-product-list-js": {
+      "js": [
+        "/assets/storefront/build/ibexa-storefront-product-list-js.js"
+      ]
+    },
+    "ibexa-storefront-cart-js": {
+      "js": [
+        "/assets/storefront/build/ibexa-storefront-cart-js.js"
+      ]
+    },
+    "ibexa-storefront-checkout-js": {
+      "js": [
+        "/assets/storefront/build/ibexa-storefront-checkout-js.js"
+      ]
+    },
+    "ibexa-storefront-product-details-js": {
+      "js": [
+        "/assets/storefront/build/ibexa-storefront-product-details-js.js"
+      ]
+    },
+    "ibexa-storefront-account-js": {
+      "js": [
+        "/assets/storefront/build/ibexa-storefront-account-js.js"
+      ]
+    },
+    "ibexa-storefront-notice-card-js": {
+      "js": [
+        "/assets/storefront/build/ibexa-storefront-notice-card-js.js"
+      ]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+
+-
+    name: taxonomy_folder_location_id
+    value: 57
+
+-
+    name: taxonomy_tag_folder_location_id
+    value: 58
+
+-
+    name: ref__product_catalog_root
+    value: 60
+
+-
+    name: ref__checkout__customers_user_group__location_id
+    value: 64
+
+-
+    name: ref__checkout__customers_user_group__content_id
+    value: 63

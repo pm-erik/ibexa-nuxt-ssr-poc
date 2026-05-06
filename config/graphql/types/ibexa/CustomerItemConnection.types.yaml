@@ -1,0 +1,9 @@
+CustomerItemConnection:
+    type: relay-connection
+    config:
+        nodeType: CustomerItem
+        connectionFields:
+            sliceSize:
+                type: Int!
+            orderBy:
+                type: String

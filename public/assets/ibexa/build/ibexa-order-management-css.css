@@ -1,0 +1,171 @@
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@symfony/webpack-encore/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[1].use[1]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[4].oneOf[1].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[1].use[3]!./vendor/ibexa/order-management/src/bundle/Resources/public/scss/ibexa-order-management.scss ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+:root {
+  --ibexa-hover-color: var(--ibexa-hover-color, $ibexa-color-primary);
+  --ibexa-border-color: var(--ibexa-border-color, $ibexa-color-dark);
+}
+
+@keyframes remove-field {
+  100% {
+    height: 0;
+    margin-bottom: 0;
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+@keyframes item-remove-pulse {
+  0% {
+    border-color: #f3f3f6;
+    box-shadow: 0 0 0 0 #f3f3f6;
+  }
+  10% {
+    border-color: #f3f3f6;
+    box-shadow: 0 0 0 0 #f3f3f6;
+  }
+  20% {
+    border-color: #f3f3f6;
+    box-shadow: 0 0 0 0.625rem #f3f3f6;
+  }
+  100% {
+    border-color: #f3f3f6;
+    box-shadow: 0 0 0 0 #f3f3f6;
+  }
+}
+@keyframes item-highlight-pulse {
+  0% {
+    border-color: #b3d3ff;
+    background-color: #ecf4ff;
+    box-shadow: 0 0 0 0 #ecf4ff;
+  }
+  10% {
+    border-color: #b3d3ff;
+    background-color: #ecf4ff;
+    box-shadow: 0 0 0 0 #ecf4ff;
+  }
+  20% {
+    border-color: #b3d3ff;
+    background-color: #ecf4ff;
+    box-shadow: 0 0 0 0.625rem #ecf4ff;
+  }
+  100% {
+    border-color: #b3d3ff;
+    background-color: #ecf4ff;
+    box-shadow: 0.25rem 0.125rem 1.0625rem 0 rgba(65, 145, 255, 0.05);
+  }
+}
+@keyframes spinner-animation {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.ibexa-om-order-cart-cost-summary {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 0.5rem;
+  background: #fbfbfc;
+  border: 0.0625rem solid #ececf1;
+  border-radius: 0.625rem;
+}
+.ibexa-om-order-cart-cost-summary__headline {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.ibexa-om-order-cart-cost-summary__item {
+  display: flex;
+  justify-content: space-between;
+}
+.ibexa-om-order-cart-cost-summary__item--total {
+  border-top: 0.0625rem solid #e0e0e8;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+.ibexa-om-order-cart-cost-summary__item-label--total, .ibexa-om-order-cart-cost-summary__item-value--total {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.ibexa-om-order-cart-cost-summary__item-value {
+  color: #71767c;
+}
+.ibexa-om-order-cart-cost-summary__item-value--total {
+  color: #ae1164;
+}
+
+.ibexa-om-order-tab-items {
+  margin-top: 0.875rem;
+}
+
+.ibexa-om-order-tab-summary {
+  margin-top: 0.875rem;
+}
+.ibexa-om-order-tab-summary__stats {
+  display: flex;
+  gap: 1.5rem;
+}
+.ibexa-om-order-tab-summary__details-grid {
+  display: grid;
+  grid-template-areas: "customer-details addresses" "shipment addresses" "payment addresses";
+  gap: 1.5rem;
+  margin-top: 2.0625rem;
+}
+.ibexa-om-order-tab-summary__details-wrapper {
+  border: 0.0625rem solid #ececf1;
+  border-radius: 0.625rem;
+  padding: 1.5rem 1.5rem 2.0625rem 1.5rem;
+}
+.ibexa-om-order-tab-summary__details-wrapper--customer-details {
+  grid-area: customer-details;
+  background: #fbfbfc;
+}
+.ibexa-om-order-tab-summary__details-wrapper--shipment {
+  grid-area: shipment;
+}
+.ibexa-om-order-tab-summary__details-wrapper--payment {
+  grid-area: payment;
+}
+.ibexa-om-order-tab-summary__details-outer-wrapper--addresses {
+  grid-area: addresses;
+}
+.ibexa-om-order-tab-summary .ibexa-details__item-content {
+  display: flex;
+}
+
+.ibexa-om-orders-filters .ibexa-adaptive-filters__static-left {
+  width: 25rem;
+  flex-shrink: 0;
+}
+.ibexa-om-orders-filters .ibexa-dropdown {
+  width: 12.5rem;
+}
+.ibexa-om-orders-filters .ibexa-input--date {
+  min-width: 11.25rem;
+}
+.ibexa-om-orders-filters__price-wrapper {
+  width: 6.25rem;
+}
+.ibexa-om-orders-filters__currency-wrapper {
+  margin-left: 1rem;
+}
+.ibexa-om-orders-filters__currency-wrapper .ibexa-dropdown {
+  width: 6.875rem;
+  min-width: initial;
+}
+
+.ibexa-om-orders-list__sort-order {
+  border-left: 0.125rem solid #e0e0e8;
+  padding-left: 1.3125rem;
+}
+.ibexa-om-orders-list__sort-order .ibexa-dropdown {
+  width: auto;
+}
+.ibexa-om-orders-list__sort-order-dropdown {
+  width: 12.5rem;
+}
+.ibexa-om-orders-list__sort-order-dropdown .ibexa-dropdown__selection-info {
+  padding-left: 0;
+  border: none;
+}

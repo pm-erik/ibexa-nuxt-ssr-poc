@@ -1,0 +1,35 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@symfony/webpack-encore/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[1].use[1]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[4].oneOf[1].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[1].use[3]!./vendor/ibexa/shipping/src/bundle/Resources/public/scss/ibexa-shipping-edit.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.ibexa-shipping-edit-form__tax-rate {
+  display: inline-block;
+  min-width: 20rem;
+  margin-top: 1.5rem;
+}
+
+.ibexa-shipping-edit-cost-widget__value {
+  display: flex;
+}
+.ibexa-shipping-edit-cost-widget__row--price {
+  margin-right: 0.25rem;
+}
+.ibexa-shipping-edit-cost-widget__row--price .ibexa-input-text-wrapper {
+  width: 20rem;
+  max-width: initial;
+}
+.ibexa-shipping-edit-cost-widget__row--currency .ibexa-dropdown {
+  width: 6.25rem;
+  min-width: initial;
+}
+
+.ibexa-shipping-edit-cost-row {
+  align-items: center;
+}
+.ibexa-shipping-edit-cost-row__prefix {
+  height: 3rem;
+  line-height: 3rem;
+  margin-right: 1.75rem;
+}
+.ibexa-shipping-edit-cost-row .ibexa-label {
+  margin-top: 0;
+}

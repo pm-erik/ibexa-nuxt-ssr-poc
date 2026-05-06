@@ -1,0 +1,7 @@
+OrdersPageBlockViews:
+    type: enum
+    config:
+        values:
+            default:
+                value: '@ibexadesign/page_builder/blocks/orders.html.twig'
+                description: 'Default block layout'

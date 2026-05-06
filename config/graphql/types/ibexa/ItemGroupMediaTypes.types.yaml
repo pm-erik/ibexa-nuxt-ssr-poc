@@ -1,0 +1,10 @@
+ItemGroupMediaTypes:
+    type: object
+    config:
+        fields:
+            file:
+                type: FileItemType
+                resolve: '@=query("ContentType", {"identifier": "file"})'
+            image:
+                type: ImageItemType
+                resolve: '@=query("ContentType", {"identifier": "image"})'

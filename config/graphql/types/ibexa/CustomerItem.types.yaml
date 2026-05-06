@@ -1,0 +1,36 @@
+CustomerItem:
+    type: object
+    inherits:
+        - AbstractItem
+    config:
+        interfaces:
+            - Item
+            - Node
+        fields:
+            firstName:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "first_name", args)'
+                args:
+                    language: { type: RepositoryLanguage }
+            lastName:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "last_name", args)'
+                args:
+                    language: { type: RepositoryLanguage }
+            userAccount:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "user_account", args).id'
+            image:
+                type: ImageFieldValue
+                resolve: '@=query("ItemFieldValue", value, "image", args)'
+                args:
+                    language: { type: RepositoryLanguage }
+            customerGroup:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "customer_group", args)'
+            billingAddress:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "billing_address", args)'
+            shippingAddress:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "shipping_address", args)'

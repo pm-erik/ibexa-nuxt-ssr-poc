@@ -1,0 +1,7 @@
+OrdersByStatusPageBlockViews:
+    type: enum
+    config:
+        values:
+            default:
+                value: '@ibexadesign/order_management/dashboard/blocks/orders_status.html.twig'
+                description: 'Default block layout'

@@ -1,0 +1,29 @@
+FolderItem:
+    type: object
+    inherits:
+        - AbstractItem
+    config:
+        interfaces:
+            - Item
+            - Node
+        fields:
+            name:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "name", args)'
+                args:
+                    language: { type: RepositoryLanguage }
+            shortName:
+                type: String
+                resolve: '@=query("ItemFieldValue", value, "short_name", args)'
+                args:
+                    language: { type: RepositoryLanguage }
+            shortDescription:
+                type: RichTextFieldValue
+                resolve: '@=query("ItemFieldValue", value, "short_description", args)'
+                args:
+                    language: { type: RepositoryLanguage }
+            description:
+                type: RichTextFieldValue
+                resolve: '@=query("ItemFieldValue", value, "description", args)'
+                args:
+                    language: { type: RepositoryLanguage }

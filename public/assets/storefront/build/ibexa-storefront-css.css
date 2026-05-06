@@ -1,0 +1,2555 @@
+/*!****************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@symfony/webpack-encore/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[1].use[1]!./vendor/ibexa/storefront/src/bundle/Resources/public/scss/normalize.css ***!
+  \****************************************************************************************************************************************************************************************************/
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+  margin: 0;
+}
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+
+main {
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+[hidden] {
+  display: none;
+}
+
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@symfony/webpack-encore/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[1].use[1]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[4].oneOf[1].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[1].use[3]!./vendor/ibexa/storefront/src/bundle/Resources/public/scss/storefront.scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #131c26;
+}
+
+a {
+  color: #131c26;
+}
+
+.ibexa-store-errors {
+  font-size: 14px;
+  color: #db0032;
+  margin-top: 4px;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/bundles/ibexastorefront/font/NotoSans-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/bundles/ibexastorefront/font/NotoSans-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/bundles/ibexastorefront/font/NotoSans-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/bundles/ibexastorefront/font/NotoSans-Italic.ttf");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/bundles/ibexastorefront/font/NotoSans-SemiBoldItalic.ttf");
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/bundles/ibexastorefront/font/NotoSans-BoldItalic.ttf");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("/bundles/ibexastorefront/font/WorkSans-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+}
+.ibexa-store-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 16px;
+  padding: 12px 16px;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 10px;
+  color: #4191ff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.ibexa-store-btn[disabled], .ibexa-store-btn:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.ibexa-store-btn--primary, .ibexa-store-btn--primary-outline-light {
+  border-color: #4191ff;
+  background: #4191ff;
+  color: #ffffff;
+}
+.ibexa-store-btn--primary:hover, .ibexa-store-btn--primary-outline-light:hover {
+  border-color: #275799;
+  background: #275799;
+}
+.ibexa-store-btn--primary:active, .ibexa-store-btn--primary-outline-light:active {
+  border-color: #3474cc;
+  background: #3474cc;
+}
+.ibexa-store-btn--primary[disabled], [disabled].ibexa-store-btn--primary-outline-light, .ibexa-store-btn--primary:disabled, .ibexa-store-btn--primary-outline-light:disabled {
+  border-color: #cfd2d5;
+  background: #cfd2d5;
+}
+.ibexa-store-btn--outline-light {
+  border-color: #4191ff;
+  background: #ffffff;
+  color: #4191ff;
+}
+.ibexa-store-btn--outline-light:hover {
+  border-color: #275799;
+  background: #275799;
+  color: #ffffff;
+}
+.ibexa-store-btn--outline-light:active {
+  border-color: #3474cc;
+  background: #3474cc;
+  color: #ffffff;
+}
+.ibexa-store-btn--outline-light.disabled, .ibexa-store-btn--outline-light[disabled], .ibexa-store-btn--outline-light:disabled {
+  border-color: #cfd2d5;
+  color: #cfd2d5;
+}
+.ibexa-store-btn--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: #4191ff;
+}
+.ibexa-store-btn--secondary {
+  background-color: transparent;
+  border-color: #4191ff;
+  color: #4191ff;
+}
+.ibexa-store-btn--small {
+  font-size: 14px;
+  padding: 0;
+}
+.ibexa-store-btn--primary-outline-light {
+  border-color: #ffffff;
+}
+
+.ibexa-store-badge {
+  height: 24px;
+  padding: 4px 10px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: normal;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+.ibexa-store-badge--status {
+  position: relative;
+  padding-left: 16px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-width: 1px;
+  border-style: solid;
+}
+.ibexa-store-badge--status::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ibexa-store-badge--custom-colors {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  border-color: var(--primary-color);
+}
+.ibexa-store-badge--custom-colors .ibexa-icon {
+  fill: var(--primary-color);
+}
+.ibexa-store-badge--custom-colors::before {
+  background-color: var(--primary-color);
+}
+.ibexa-store-badge--ghost {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.ibexa-store-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+.ibexa-store-table__head-cell {
+  padding-bottom: 8px;
+  font-size: 14px;
+  line-height: 170%;
+  padding-right: 8px;
+  border-bottom: 2px solid #4191ff;
+  vertical-align: bottom;
+}
+.ibexa-store-table__body-cell {
+  padding: 16px 8px 16px 0px;
+}
+.ibexa-store-table__empty-table-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 100px 0;
+}
+.ibexa-store-table__empty-table-info-text, .ibexa-store-table__empty-table-action-text {
+  color: #71767c;
+  font-size: 16px;
+  line-height: 170%;
+}
+.ibexa-store-table__empty-table-info-text {
+  font-weight: 600;
+}
+.ibexa-store-table--primary .ibexa-store-table__body-cell {
+  border-bottom: 1px solid #f9f9fa;
+}
+.ibexa-store-table--secondary .ibexa-store-table__body-cell {
+  background-color: #ffffff;
+  border-bottom: 1px solid #f9f9fa;
+}
+.ibexa-store-table--secondary .ibexa-store-table__body-cell:first-child {
+  padding-left: 8px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.ibexa-store-table--secondary .ibexa-store-table__body-cell:last-child {
+  padding-right: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.ibexa-store-counter-title__counter {
+  color: #71767c;
+  font-weight: normal;
+}
+
+.ibexa-store-tucked-menu {
+  position: relative;
+}
+.ibexa-store-tucked-menu__btn {
+  height: 44px;
+  color: #131c26;
+}
+.ibexa-store-tucked-menu__dots {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+.ibexa-store-tucked-menu__popup-menu {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  border: 1px solid #f9f9fa;
+  min-width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 14px;
+}
+.ibexa-store-tucked-menu__popup-menu--hidden {
+  display: none;
+}
+.ibexa-store-tucked-menu__popup-menu-item {
+  background-color: #ffffff;
+}
+.ibexa-store-tucked-menu__popup-menu-item:hover {
+  background-color: #f3f3f6;
+}
+.ibexa-store-tucked-menu__popup-menu-item-content {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ibexa-store-account-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 400px;
+  padding: 40px 32px 16px 16px;
+  background-color: #f9f9fa;
+  border-radius: 8px;
+}
+.ibexa-store-account-menu__title {
+  margin: 0;
+}
+.ibexa-store-account-menu__list {
+  list-style: none;
+  width: 100%;
+  margin: 0;
+  padding-left: 16px;
+}
+.ibexa-store-account-menu__list-item {
+  display: flex;
+  width: 100%;
+  color: #131c26;
+}
+.ibexa-store-account-menu__list-item.current {
+  color: #4191ff;
+  font-weight: 700;
+}
+.ibexa-store-account-menu__list-item.last {
+  border-top: 1px solid #cfd2d5;
+  margin-top: 16px;
+}
+.ibexa-store-account-menu__link {
+  padding: 16px 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ibexa-store-account-panel {
+  display: grid;
+  grid-template-areas: "menu content";
+  grid-template-columns: 350px 1fr;
+  grid-gap: 24px;
+}
+
+.ibexa-store-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 0;
+  display: grid;
+  gap: 16px;
+}
+
+.ibexa-store-top-menu {
+  background-color: #f9f9fa;
+}
+.ibexa-store-top-menu a {
+  text-decoration: none;
+  color: #4191ff;
+}
+.ibexa-store-top-menu .ibexa-store-container {
+  padding: 0;
+}
+.ibexa-store-top-menu__content {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+}
+.ibexa-store-top-menu__left, .ibexa-store-top-menu__right {
+  display: flex;
+  gap: 16px;
+}
+
+.ibexa-store-main-menu {
+  background-color: #f9f9fa;
+}
+.ibexa-store-main-menu .ibexa-store-container {
+  justify-items: end;
+  padding-right: 32px;
+}
+
+.ibexa-store-minicart-wrapper {
+  text-decoration: none;
+}
+
+.ibexa-store-user-menu {
+  justify-self: end;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+.ibexa-store-user-menu__login-link {
+  margin-right: 8px;
+}
+.ibexa-store-user-menu__user-avatar {
+  height: 24px;
+  margin-right: 8px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.ibexa-store-header .ibexa-store-container {
+  grid-template-columns: auto 1fr;
+}
+
+.ibexa-store-search {
+  justify-self: end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ibexa-store-footer {
+  background-color: #f9f9fa;
+}
+
+.ibexa-store-notice-card {
+  display: flex;
+  flex-direction: row;
+  padding: 16px;
+  border-radius: 8px;
+  border-width: 1px;
+  border-style: solid;
+}
+.ibexa-store-notice-card--warning {
+  background: rgba(252, 174, 66, 0.15);
+  border-color: #fcae42;
+}
+.ibexa-store-notice-card--success {
+  background: rgba(0, 164, 43, 0.15);
+  border-color: #00a42b;
+}
+.ibexa-store-notice-card__content {
+  padding: 8px 0;
+  flex: 1;
+}
+.ibexa-store-notice-card__actions {
+  display: flex;
+  align-items: center;
+}
+.ibexa-store-notice-card__close-btn {
+  border: none;
+  background-color: transparent;
+}
+.ibexa-store-notice-card__close-cross {
+  height: 16px;
+  width: 16px;
+}
+.ibexa-store-notice-card__close-cross::before, .ibexa-store-notice-card__close-cross::after {
+  content: "";
+  border-top: 1px solid black;
+  width: 21px;
+  display: block;
+}
+.ibexa-store-notice-card__close-cross::before {
+  transform: rotate(-45deg) translate(-6px, 4px);
+}
+.ibexa-store-notice-card__close-cross::after {
+  transform: rotate(45deg) translate(3px, 5px);
+}
+
+.ibexa-store-products-list {
+  display: flex;
+  align-items: flex-start;
+}
+.ibexa-store-products-list__aside {
+  flex-basis: 300px;
+  margin-right: 20px;
+  background-color: #f9f9fa;
+  padding: 24px;
+  border-radius: 8px;
+}
+.ibexa-store-products-list__content {
+  flex-basis: calc(100% - 320px);
+}
+.ibexa-store-products-list__products {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+}
+.ibexa-store-products-list__actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.ibexa-store-products-list__results-title {
+  font-size: 20px;
+}
+.ibexa-store-products-list__title {
+  margin-top: 0;
+}
+
+.ibexa-store-quick-order-menu {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.ibexa-store-quick-order__content {
+  padding: 36px;
+  background: #f9f9fa;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+.ibexa-store-quick-order__main {
+  display: grid;
+  grid-template-areas: "errors errors" "entries file";
+}
+.ibexa-store-quick-order__file-wrapper {
+  grid-area: file;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.ibexa-store-quick-order__file-wrapper .ibexa-store-errors {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+.ibexa-store-quick-order__file-wrapper-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 24px 32px 24px;
+  border-radius: 8px;
+  max-width: 364px;
+  background: #ffffff;
+  background-image: linear-gradient(to right, #cfd2d5 50%, transparent 50%), linear-gradient(to right, #cfd2d5 50%, transparent 50%), linear-gradient(to bottom, #cfd2d5 50%, transparent 50%), linear-gradient(to bottom, #cfd2d5 50%, transparent 50%);
+  background-position: left top, left bottom, left top, right top;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: 20px 1px, 20px 1px, 1px 20px, 1px 20px;
+}
+.ibexa-store-quick-order__file-input-description {
+  text-align: center;
+  margin-bottom: 16px;
+  line-height: 170%;
+}
+.ibexa-store-quick-order__file-add-btn {
+  margin-bottom: 16px;
+}
+.ibexa-store-quick-order__file-added-info:not(:empty) {
+  margin-bottom: 16px;
+}
+.ibexa-store-quick-order__file {
+  display: none;
+}
+.ibexa-store-quick-order__add-to-cart-btn-wrapper {
+  display: flex;
+}
+.ibexa-store-quick-order__add-to-cart-btn {
+  margin-left: auto;
+}
+.ibexa-store-quick-order__entries-wrapper {
+  grid-area: entries;
+}
+.ibexa-store-quick-order__entry {
+  margin-bottom: 16px;
+}
+.ibexa-store-quick-order__entry:not(:first-child) .ibexa-store-label {
+  display: none;
+}
+.ibexa-store-quick-order__entry-main {
+  display: flex;
+  align-items: flex-end;
+}
+.ibexa-store-quick-order__code-input {
+  width: 280px;
+  margin-right: 16px;
+}
+.ibexa-store-quick-order__delete-entry-btn-cross {
+  height: 16px;
+  width: 16px;
+}
+.ibexa-store-quick-order__delete-entry-btn-cross::before, .ibexa-store-quick-order__delete-entry-btn-cross::after {
+  content: "";
+  border-top: 1px solid black;
+  width: 21px;
+  display: block;
+}
+.ibexa-store-quick-order__delete-entry-btn-cross::before {
+  transform: rotate(-45deg) translate(-6px, 4px);
+}
+.ibexa-store-quick-order__delete-entry-btn-cross::after {
+  transform: rotate(45deg) translate(3px, 5px);
+}
+
+.ibexa-store-product-status {
+  border: 1px solid #f9f9fa;
+  border-radius: 4px;
+  padding: 2px 8px;
+  background-color: #ffffff;
+  font-size: 14px;
+}
+.ibexa-store-product-status--success {
+  color: #00a42b;
+}
+.ibexa-store-product-status--error {
+  color: #db0032;
+}
+
+.ibexa-store-product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #f9f9fa;
+  border-radius: 8px;
+  padding-bottom: 8px;
+}
+.ibexa-store-product-card__image-wrapper {
+  height: 250px;
+  position: relative;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #f9f9fa;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  overflow: hidden;
+}
+.ibexa-store-product-card__discount-badge {
+  position: absolute;
+  top: 20px;
+  left: 0;
+}
+.ibexa-store-product-card__image {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+.ibexa-store-product-card__link {
+  text-decoration: none;
+  color: #131c26;
+}
+.ibexa-store-product-card__details {
+  padding: 0 8px;
+}
+.ibexa-store-product-card__code {
+  font-size: 14px;
+  color: #71767c;
+}
+.ibexa-store-product-card__name {
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 12px;
+  line-height: 130%;
+}
+.ibexa-store-product-card__description {
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin-bottom: 16px;
+}
+.ibexa-store-product-card__footer {
+  padding: 0 8px;
+}
+.ibexa-store-product-card__prices {
+  display: flex;
+  gap: 5px;
+}
+.ibexa-store-product-card__add-to-cart {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "input input-label" "btn btn";
+  grid-column-gap: 28px;
+  grid-row-gap: 10px;
+  align-items: center;
+}
+.ibexa-store-product-card__add-to-cart .ibexa-store-add-to-cart__quantity-input {
+  grid-area: input;
+}
+.ibexa-store-product-card__add-to-cart .ibexa-store-add-to-cart__quantity-input-label {
+  grid-area: input-label;
+}
+.ibexa-store-product-card__add-to-cart .ibexa-store-add-to-cart__add-to-cart-btn {
+  grid-area: btn;
+}
+.ibexa-store-product-card__view-details {
+  width: 100%;
+  margin-top: 58px;
+}
+.ibexa-store-product-card .ibexa-store-product-availability {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+}
+.ibexa-store-product-card .ibexa-store-price {
+  margin-bottom: 16px;
+}
+
+.ibexa-store-select {
+  height: 48px;
+  background: #ffffff;
+  border: 1px solid #cfd2d5;
+  border-radius: 8px;
+  padding: 11px 16px;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: block;
+}
+.ibexa-store-select[hidden] {
+  display: none;
+}
+
+.ibexa-store-choice {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.ibexa-store-choice__input {
+  margin-right: 8px;
+  accent-color: #4191ff;
+}
+.ibexa-store-choice__label.ibexa-store-label {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.ibexa-store-choice__label.ibexa-store-label::after {
+  display: none;
+}
+.ibexa-store-choice--hidden {
+  display: none;
+}
+
+.ibexa-store-filter {
+  margin-bottom: 24px;
+}
+.ibexa-store-filter--collapsed .ibexa-store-filter__toggler {
+  transform: rotate(180deg);
+}
+.ibexa-store-filter--collapsed .ibexa-store-filter__widget {
+  display: none;
+}
+.ibexa-store-filter__label {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: #3b424a;
+}
+.ibexa-store-filter__label .ibexa-store-label {
+  margin: 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+.ibexa-store-filter__toggler {
+  position: relative;
+  right: -2px;
+}
+.ibexa-store-filter__toggler:after, .ibexa-store-filter__toggler:before {
+  background-color: #4191ff;
+  content: "";
+  display: block;
+  width: 2px;
+  height: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.ibexa-store-filter__toggler:after {
+  transform: translate(-3px, -50%) rotate(45deg);
+}
+.ibexa-store-filter__toggler:before {
+  transform: translate(1px, -50%) rotate(-45deg);
+}
+.ibexa-store-filter__more-btn--hidden {
+  display: none;
+}
+
+.ibexa-store-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+.ibexa-store-pagination nav {
+  display: flex;
+}
+.ibexa-store-pagination a {
+  text-decoration: none;
+  color: #131c26;
+}
+.ibexa-store-pagination a,
+.ibexa-store-pagination span {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ibexa-store-pagination .disabled {
+  color: #cfd2d5;
+}
+.ibexa-store-pagination .current {
+  background-color: #4191ff;
+  color: #ffffff;
+  border-radius: 8px;
+}
+
+.ibexa-store-input {
+  height: 48px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #cfd2d5;
+  font-size: 14px;
+  display: block;
+}
+.ibexa-store-input::placeholder {
+  color: #71767c;
+}
+.ibexa-store-input--number {
+  padding: 12px 2px 12px 16px;
+  padding-left: 35px;
+  max-width: 100px;
+}
+.ibexa-store-input--search {
+  width: 540px;
+}
+
+.ibexa-store-price-filter {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.ibexa-store-price-filter__separator {
+  width: 20px;
+  border: 1px solid #cfd2d5;
+  height: 0px;
+  align-self: center;
+}
+.ibexa-store-price-filter__wrapper {
+  position: relative;
+}
+.ibexa-store-price-filter__wrapper:focus-within .ibexa-store-price-filter__currency-container {
+  border-left: 2px solid #015ecc;
+  border-top: 2px solid #015ecc;
+  border-bottom: 2px solid #015ecc;
+}
+.ibexa-store-price-filter__wrapper:focus-within .ibexa-store-price-filter__currency {
+  margin-left: -1px;
+}
+.ibexa-store-price-filter__currency-container {
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  background-color: #ececf1;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border: 1px solid #cfd2d5;
+}
+.ibexa-store-price-filter__currency {
+  color: #71767c;
+  font-size: 12px;
+}
+
+@-moz-document url-prefix() {
+  .ibexa-store-price-filter__wrapper:focus-within .ibexa-store-price-filter__currency-container {
+    border: none;
+  }
+}
+.ibexa-store-product__card {
+  display: flex;
+  margin-bottom: 24px;
+}
+.ibexa-store-product__slider-wrapper {
+  flex-basis: 50%;
+}
+.ibexa-store-product__actions-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-basis: 50%;
+}
+.ibexa-store-product__code {
+  font-size: 14px;
+  color: #71767c;
+  margin-bottom: 16px;
+}
+.ibexa-store-product__availability {
+  margin-bottom: 100px;
+}
+.ibexa-store-product__info-title {
+  font-size: 16px;
+  margin-top: 0;
+}
+.ibexa-store-product__add-to-cart-form {
+  width: 100%;
+}
+.ibexa-store-price ~ .ibexa-store-product__add-to-cart-form {
+  margin-top: 0;
+}
+.ibexa-store-product__add-to-cart {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "quantity-input quantity-label" "btn btn";
+  grid-column-gap: 28px;
+  grid-row-gap: 10px;
+  align-items: center;
+}
+.ibexa-store-product__add-to-cart--variant {
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-areas: "variant-selector quantity-input quantity-label" "btn btn btn";
+}
+.ibexa-store-product__add-to-cart .ibexa-store-add-to-cart__variant-selector {
+  grid-area: variant-selector;
+}
+.ibexa-store-product__add-to-cart .ibexa-store-add-to-cart__quantity-input {
+  grid-area: quantity-input;
+}
+.ibexa-store-product__add-to-cart .ibexa-store-add-to-cart__quantity-input-label {
+  grid-area: quantity-label;
+}
+.ibexa-store-product__add-to-cart .ibexa-store-add-to-cart__add-to-cart-btn {
+  grid-area: btn;
+}
+.ibexa-store-product__prices-info {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  margin-bottom: 16px;
+  align-self: flex-end;
+}
+.ibexa-store-product__discount-info {
+  width: 100%;
+}
+.ibexa-store-product__discount-price-info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ibexa-store-info-box {
+  padding: 24px;
+  background-color: #f3f3f6;
+  border-radius: 0px 8px 8px 8px;
+  margin-bottom: 24px;
+}
+.ibexa-store-info-box__content-wrapper {
+  padding: 48px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.ibexa-store-info-box__content {
+  max-width: 55%;
+}
+.ibexa-store-info-box__content--wide {
+  max-width: 100%;
+}
+
+.ibexa-store-attributes__group-name {
+  font-size: 14px;
+  padding: 8px 16px;
+  margin-bottom: 0;
+  line-height: 1.7;
+}
+.ibexa-store-attributes__item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  line-height: 1.7;
+}
+.ibexa-store-attributes__item:nth-of-type(odd) {
+  background-color: #f9f9fa;
+}
+.ibexa-store-attributes__item-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ibexa-store-attributes__item-color-preview {
+  display: inline-block;
+  width: 24px;
+  height: 18px;
+  border: 1px solid #131c26;
+  border-radius: 4px;
+  margin-left: 4px;
+}
+
+.ibexa-store-product-slider {
+  display: flex;
+  margin-right: 45px;
+}
+.ibexa-store-product-slider__controls-wrapper {
+  flex-basis: 80px;
+  margin-right: 18px;
+  display: flex;
+  flex-direction: column;
+}
+.ibexa-store-product-slider__control {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  height: 30px;
+}
+.ibexa-store-product-slider__control--prev {
+  position: relative;
+  right: -2px;
+}
+.ibexa-store-product-slider__control--prev:after, .ibexa-store-product-slider__control--prev:before {
+  background-color: #3b424a;
+  content: "";
+  display: block;
+  width: 2px;
+  height: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.ibexa-store-product-slider__control--prev:after {
+  transform: translate(-3px, -50%) rotate(45deg);
+}
+.ibexa-store-product-slider__control--prev:before {
+  transform: translate(1px, -50%) rotate(-45deg);
+}
+.ibexa-store-product-slider__control--prev {
+  right: 0;
+  margin-bottom: 8px;
+}
+.ibexa-store-product-slider__control--next {
+  position: relative;
+  right: -2px;
+}
+.ibexa-store-product-slider__control--next:after, .ibexa-store-product-slider__control--next:before {
+  background-color: #3b424a;
+  content: "";
+  display: block;
+  width: 2px;
+  height: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.ibexa-store-product-slider__control--next:after {
+  transform: translate(-3px, -50%) rotate(45deg);
+}
+.ibexa-store-product-slider__control--next:before {
+  transform: translate(1px, -50%) rotate(-45deg);
+}
+.ibexa-store-product-slider__control--next {
+  transform: rotate(180deg);
+  margin-top: 8px;
+}
+.ibexa-store-product-slider__thumbnails-wrapper {
+  width: 80px;
+  height: 440px;
+  overflow: hidden;
+}
+.ibexa-store-product-slider__thumbnail {
+  height: 80px;
+  cursor: pointer;
+}
+.ibexa-store-product-slider__thumbnail:not(:last-of-type) {
+  margin-bottom: 40px;
+}
+.ibexa-store-product-slider__thumbnail .ezimage-field {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  display: flex;
+  height: 80px;
+  border-radius: 8px;
+  border: 1px solid #f3f3f6;
+  overflow: hidden;
+}
+.ibexa-store-product-slider__thumbnail .ezimage-field img {
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.ibexa-store-product-slider__thumbnail--active .ezimage-field {
+  border-color: #4191ff;
+}
+.ibexa-store-product-slider__preview-wrapper {
+  border-radius: 8px;
+  border: 1px solid #f3f3f6;
+  position: relative;
+  width: 100%;
+}
+.ibexa-store-product-slider__preview-wrapper .ibexa-store-product-slider__control {
+  position: absolute;
+  top: 50%;
+  background-color: #f9f9fa;
+  height: 32px;
+  width: 32px;
+  border-radius: 8px;
+  margin: 0;
+  padding: 7px;
+}
+.ibexa-store-product-slider__preview-wrapper .ibexa-store-product-slider__control--prev {
+  left: 14px;
+  transform: rotate(-90deg);
+}
+.ibexa-store-product-slider__preview-wrapper .ibexa-store-product-slider__control--next {
+  right: 14px;
+  transform: rotate(90deg);
+}
+.ibexa-store-product-slider__image-wrapper {
+  height: 100%;
+  width: 100%;
+}
+.ibexa-store-product-slider__image-wrapper .ezimage-field {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.ibexa-store-product-slider__image-wrapper .ezimage-field img {
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.ibexa-store-product-slider__image-preview {
+  width: 100%;
+  height: 100%;
+}
+
+.ibexa-store-logo__image {
+  height: 58px;
+}
+
+.ibexa-store-popup-menu {
+  position: relative;
+}
+.ibexa-store-popup-menu__toggler {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  padding: 4px;
+  cursor: pointer;
+}
+.ibexa-store-popup-menu__icon {
+  position: relative;
+  right: -2px;
+}
+.ibexa-store-popup-menu__icon:after, .ibexa-store-popup-menu__icon:before {
+  background-color: #3b424a;
+  content: "";
+  display: block;
+  width: 2px;
+  height: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.ibexa-store-popup-menu__icon:after {
+  transform: translate(-3px, -50%) rotate(45deg);
+}
+.ibexa-store-popup-menu__icon:before {
+  transform: translate(1px, -50%) rotate(-45deg);
+}
+.ibexa-store-popup-menu__label {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+.ibexa-store-popup-menu__list {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  border: 1px solid #f9f9fa;
+  min-width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 1;
+}
+.ibexa-store-popup-menu__link {
+  display: block;
+  padding: 8px 16px;
+  background-color: #ffffff;
+  text-decoration: none;
+  color: #131c26;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ibexa-store-popup-menu__link:hover {
+  background-color: #f3f3f6;
+}
+.ibexa-store-popup-menu--collapsed .ibexa-store-popup-menu__list {
+  display: none;
+}
+.ibexa-store-popup-menu--collapsed .ibexa-store-popup-menu__icon {
+  transform: rotate(180deg);
+}
+
+.ibexa-store-language-switcher {
+  display: flex;
+  align-items: center;
+}
+
+.ibexa-store-region-switcher {
+  display: flex;
+  align-items: center;
+}
+
+.ibexa-store-currency-switcher {
+  display: flex;
+  align-items: center;
+}
+
+.ibexa-store-label {
+  font-size: 14px;
+  margin: 16px 0 4px;
+  display: block;
+  color: #3b424a;
+}
+.ibexa-store-label.required::after {
+  content: "*";
+}
+
+.ibexa-store-price {
+  font-size: 14px;
+  color: #4191ff;
+}
+.ibexa-store-price__price {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.ibexa-store-change-password-form {
+  margin-bottom: 32px;
+}
+.ibexa-store-change-password-form .ibexa-store-btn {
+  margin-top: 32px;
+}
+
+.ibexa-store-order-detail {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  grid-template-areas: "back back" "header header" "details price-details" "items items";
+  row-gap: 16px;
+  column-gap: 16px;
+}
+.ibexa-store-order-detail__back-wrapper {
+  grid-area: back;
+}
+.ibexa-store-order-detail__back {
+  color: #131c26;
+}
+.ibexa-store-order-detail__header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ibexa-store-order-detail__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ibexa-store-order-detail__reorder {
+  grid-area: reorder;
+}
+.ibexa-store-order-detail__details, .ibexa-store-order-detail__price-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 24px 24px;
+  gap: 6px;
+  border-radius: 8px;
+}
+.ibexa-store-order-detail__details {
+  grid-area: details;
+  border: 2px solid #f9f9fa;
+}
+.ibexa-store-order-detail__detail, .ibexa-store-order-detail__price-detail {
+  height: 24px;
+  gap: 4px;
+}
+.ibexa-store-order-detail__detail-value {
+  display: flex;
+}
+.ibexa-store-order-detail__price-detail, .ibexa-store-order-detail__detail {
+  display: flex;
+  align-items: center;
+}
+.ibexa-store-order-detail__detail-label {
+  font-weight: 700;
+}
+.ibexa-store-order-detail__price-detail-label::after, .ibexa-store-order-detail__detail-label::after {
+  content: ":";
+}
+.ibexa-store-order-detail__price-details {
+  grid-area: price-details;
+  background: #f9f9fa;
+}
+.ibexa-store-order-detail__price-detail, .ibexa-store-order-detail__price-total {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.ibexa-store-order-detail__price-total {
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 36px;
+  border-top: 1px solid #cfd2d5;
+  font-weight: 700;
+  font-size: 20px;
+  color: #4191ff;
+}
+.ibexa-store-order-detail__items {
+  grid-area: items;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4px 16px 8px;
+  background: #f9f9fa;
+  border-radius: 8px;
+}
+.ibexa-store-order-detail__product-list-product-name-wrapper {
+  max-width: 190px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ibexa-store-order-list__filters {
+  display: grid;
+  grid-template-areas: "query status" "created-at ." ". submit";
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 48px;
+  padding: 40px 24px;
+  background: #f9f9fa;
+  border-radius: 8px;
+  margin-bottom: 40px;
+}
+.ibexa-store-order-list__filters-query {
+  grid-area: query;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.ibexa-store-order-list__filters-created-at-wrapper {
+  display: flex;
+  gap: 24px;
+}
+.ibexa-store-order-list__filters-created-at {
+  grid-area: created-at;
+}
+.ibexa-store-order-list__filters-status {
+  grid-area: status;
+}
+.ibexa-store-order-list__filters-status .ibexa-store-select {
+  width: 100%;
+}
+.ibexa-store-order-list__filters-sort-clause {
+  display: none;
+}
+.ibexa-store-order-list__filters-submit {
+  grid-area: submit;
+  display: flex;
+  justify-content: end;
+}
+.ibexa-store-order-list__identifier-link {
+  color: #131c26;
+  text-decoration: underline;
+}
+.ibexa-store-order-list__order-status {
+  display: flex;
+}
+.ibexa-store-order-list__sort-select {
+  margin-left: auto;
+}
+
+.ibexa-store-discount-badge {
+  display: flex;
+  align-items: center;
+  background-color: #f7633a;
+  color: #ffffff;
+  font-weight: 600;
+}
+.ibexa-store-discount-badge:empty {
+  display: none;
+}
+.ibexa-store-discount-badge--small {
+  font-size: 10px;
+  height: 21px;
+  padding: 2px 6px;
+}
+.ibexa-store-discount-badge--medium {
+  font-size: 16px;
+  height: 24px;
+  padding: 2px 4px;
+}
+
+.ibexa-store-discount-info {
+  display: grid;
+  grid-template-areas: "badge name description action";
+  grid-template-columns: auto auto 1fr auto;
+  background: #ffffff;
+  border-bottom: 2px solid #ff4713;
+  padding-top: 12px;
+  padding-bottom: 2px;
+}
+.ibexa-store-discount-info__badge {
+  grid-area: badge;
+}
+.ibexa-store-discount-info__label {
+  grid-area: name;
+}
+.ibexa-store-discount-info__description {
+  grid-area: description;
+  font-size: 14px;
+  color: #71767c;
+  align-self: center;
+}
+.ibexa-store-discount-info__value {
+  grid-area: value;
+  color: #71767c;
+}
+.ibexa-store-discount-info__action {
+  grid-area: action;
+  justify-self: end;
+}
+.ibexa-store-discount-info__badge:not(:empty), .ibexa-store-discount-info__label:not(:empty), .ibexa-store-discount-info__description:not(:empty), .ibexa-store-discount-info__value:not(:empty), .ibexa-store-discount-info__action:not(:empty) {
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+.ibexa-store-discount-info__label, .ibexa-store-discount-info__description, .ibexa-store-discount-info__value {
+  display: flex;
+  align-items: center;
+}
+.ibexa-store-discount-info--small {
+  grid-template-areas: "badge name name action" "description description description description";
+  padding-left: 16px;
+  padding-right: 6px;
+}
+.ibexa-store-discount-info--small.ibexa-store-discount-info--no-description {
+  grid-template-areas: "badge name name action";
+}
+.ibexa-store-discount-info--coupon {
+  grid-template-areas: "badge value value action" "name name name name" "description description description description";
+}
+
+.ibexa-store-discount-price {
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: line-through;
+  color: #f7633a;
+}
+
+@keyframes ibexa-store-add-to-cart-pulsation {
+  0% {
+    box-shadow: 0 0 0 #ff4713;
+  }
+  50% {
+    box-shadow: 0 0 8px #ff4713;
+  }
+  100% {
+    box-shadow: 0 0 0 #ff4713;
+  }
+}
+.ibexa-store-add-to-cart__quantity-input {
+  max-width: 100px;
+  text-align: center;
+}
+.ibexa-store-add-to-cart__quantity-input--highlight, .ibexa-store-add-to-cart__variant-selector--highlight {
+  box-shadow: 0 0 8px #ff4713;
+  animation: ibexa-store-add-to-cart-pulsation 2s ease-out infinite;
+  border-color: #ff4713;
+}
+.ibexa-store-add-to-cart__quantity-input--highlight:focus-visible, .ibexa-store-add-to-cart__variant-selector--highlight:focus-visible {
+  outline-style: solid;
+  outline-width: 2px;
+  outline-offset: -3px;
+}
+
+.ibexa-store-maincart-item {
+  display: grid;
+  grid-template-columns: 150px 1fr 200px;
+  gap: 6px 0;
+  grid-template-areas: "image code subtotal-label" "image product-name subtotal" "image statuses statuses" "image quantity remove-btn";
+  padding: 16px 16px 12px 8px;
+  background: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+.ibexa-store-maincart-item__image {
+  grid-area: image;
+  object-fit: contain;
+  width: 120px;
+  height: 110px;
+}
+.ibexa-store-maincart-item__product-code-wrapper {
+  grid-area: code;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #71767c;
+}
+.ibexa-store-maincart-item__product-code-label, .ibexa-store-maincart-item__product-code {
+  display: inline;
+}
+.ibexa-store-maincart-item__product-name {
+  grid-area: product-name;
+  font-weight: 700;
+  font-size: 20px;
+}
+.ibexa-store-maincart-item__statuses {
+  grid-area: statuses;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-bottom: 16px;
+}
+.ibexa-store-maincart-item__statuses .ibexa-store-product-status {
+  margin-bottom: 6px;
+}
+.ibexa-store-maincart-item__availability {
+  display: flex;
+}
+.ibexa-store-maincart-item__availability--hidden {
+  display: none;
+}
+.ibexa-store-maincart-item__availability--in .ibexa-store-product-availability--out {
+  display: none;
+}
+.ibexa-store-maincart-item__availability--out .ibexa-store-product-availability--in {
+  display: none;
+}
+.ibexa-store-maincart-item__quantity-input {
+  max-width: 88px;
+  text-align: center;
+}
+.ibexa-store-maincart-item__quantity-input--highlight {
+  box-shadow: 0 0 8px #ff4713;
+  animation: ibexa-store-add-to-cart-pulsation 2s ease-out infinite;
+  border-color: #ff4713;
+}
+.ibexa-store-maincart-item__quantity-input--highlight:focus-visible {
+  outline-style: solid;
+  outline-width: 2px;
+  outline-offset: -3px;
+}
+.ibexa-store-maincart-item__quantity {
+  grid-area: quantity;
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+.ibexa-store-maincart-item__quantity-label {
+  margin: 0 24px;
+  font-size: 14px;
+}
+.ibexa-store-maincart-item__quantity-x {
+  margin-right: 10px;
+  font-size: 16px;
+}
+.ibexa-store-maincart-item__price-net {
+  font-weight: 700;
+  font-size: 16px;
+}
+.ibexa-store-maincart-item__discount-badge, .ibexa-store-maincart-item__price-original-net {
+  margin-left: 8px;
+}
+.ibexa-store-maincart-item__discount-name-wrapper {
+  display: flex;
+  justify-content: end;
+}
+.ibexa-store-maincart-item__subtotal-price-net-label, .ibexa-store-maincart-item__subtotal-price-net {
+  font-weight: 700;
+  text-align: right;
+}
+.ibexa-store-maincart-item__subtotal-price-net-label {
+  grid-area: subtotal-label;
+  font-size: 16px;
+  line-height: 24px;
+}
+.ibexa-store-maincart-item__subtotal-price-wrapper {
+  grid-area: subtotal;
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+.ibexa-store-maincart-item__subtotal-price-net {
+  font-size: 20px;
+  line-height: 28px;
+  color: #4191ff;
+}
+.ibexa-store-maincart-item__remove-btn-wrapper {
+  grid-area: remove-btn;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.ibexa-store-maincart-item__remove-btn {
+  margin-right: -16px;
+  color: #131c26;
+}
+.ibexa-store-maincart-item--highlighted {
+  border-color: #fcae42;
+}
+.ibexa-store-maincart-item--invalid .ibexa-store-maincart-item__image, .ibexa-store-maincart-item--invalid .ibexa-store-maincart-item__product-code-wrapper, .ibexa-store-maincart-item--invalid .ibexa-store-maincart-item__product-name, .ibexa-store-maincart-item--invalid .ibexa-store-maincart-item__quantity, .ibexa-store-maincart-item--invalid .ibexa-store-maincart-item__subtotal-price-net-label, .ibexa-store-maincart-item--invalid .ibexa-store-maincart-item__subtotal-price-net {
+  opacity: 30%;
+}
+
+.ibexa-store-maincart-summary-coupon__input-container {
+  grid-template-areas: "input apply-btn" "error error";
+  column-gap: 10px;
+  display: none;
+}
+.ibexa-store-maincart-summary-coupon__input-container--visible {
+  display: grid;
+}
+.ibexa-store-maincart-summary-coupon__input {
+  grid-area: input;
+}
+.ibexa-store-maincart-summary-coupon__input--error {
+  border-color: #db0032;
+}
+.ibexa-store-maincart-summary-coupon__apply-btn {
+  grid-area: apply-btn;
+}
+.ibexa-store-maincart-summary-coupon__error {
+  grid-area: error;
+}
+.ibexa-store-maincart-summary-coupon__coupon {
+  display: none;
+}
+.ibexa-store-maincart-summary-coupon__coupon--visible {
+  display: grid;
+}
+.ibexa-store-maincart-summary-coupon__remove-btn {
+  grid-area: remove-btn;
+  justify-self: end;
+  color: #ff4713;
+}
+
+.ibexa-store-maincart-summary {
+  background: #f9f9fa;
+  border-radius: 8px;
+  padding: 24px;
+}
+.ibexa-store-maincart-summary__headline {
+  margin-bottom: 32px;
+  font-weight: 700;
+  font-size: 28px;
+}
+.ibexa-store-maincart-summary__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 32px;
+}
+.ibexa-store-maincart-summary__action {
+  width: 100%;
+}
+.ibexa-store-maincart-summary__action:not(:last-child) {
+  margin-bottom: 10px;
+}
+.ibexa-store-maincart-summary__item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 4px;
+}
+.ibexa-store-maincart-summary__item--subtotal {
+  font-weight: 700;
+}
+.ibexa-store-maincart-summary__item--total {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: #4191ff;
+}
+.ibexa-store-maincart-summary__item-label, .ibexa-store-maincart-summary__item-value {
+  white-space: nowrap;
+}
+.ibexa-store-maincart-summary__item-label {
+  margin-right: 15px;
+}
+.ibexa-store-maincart-summary__item-label::after {
+  content: ":";
+}
+.ibexa-store-maincart-summary__coupons-container {
+  margin: 32px 0;
+}
+.ibexa-store-maincart-summary__discounts-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ibexa-store-maincart-summary__discounts-info--hidden {
+  display: none;
+}
+.ibexa-store-maincart-summary__discounts-info-toggler-label {
+  margin-right: 10px;
+}
+.ibexa-store-maincart-summary__discounts-info-toggler-label--show-more {
+  display: none;
+}
+.ibexa-store-maincart-summary__discounts-info-toggler-icon {
+  display: inline-block;
+  position: relative;
+  right: -2px;
+}
+.ibexa-store-maincart-summary__discounts-info-toggler-icon:after, .ibexa-store-maincart-summary__discounts-info-toggler-icon:before {
+  background-color: #3b424a;
+  content: "";
+  display: block;
+  width: 2px;
+  height: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.ibexa-store-maincart-summary__discounts-info-toggler-icon:after {
+  transform: translate(-3px, -50%) rotate(45deg);
+}
+.ibexa-store-maincart-summary__discounts-info-toggler-icon:before {
+  transform: translate(1px, -50%) rotate(-45deg);
+}
+.ibexa-store-maincart-summary__discounts-info-toggler-icon::before, .ibexa-store-maincart-summary__discounts-info-toggler-icon::after {
+  background-color: #4191ff;
+}
+.ibexa-store-maincart-summary__discounts-info-toggler {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  font-weight: 600;
+  margin-top: 14px;
+  font-size: 14px;
+  padding: 4px;
+  cursor: pointer;
+}
+.ibexa-store-maincart-summary__discounts-info-toggler--hidden {
+  display: none;
+}
+.ibexa-store-maincart-summary__discounts-info-toggler--collapsed .ibexa-store-maincart-summary__discounts-info-toggler-label--show-more {
+  display: inline;
+}
+.ibexa-store-maincart-summary__discounts-info-toggler--collapsed .ibexa-store-maincart-summary__discounts-info-toggler-label--show-less {
+  display: none;
+}
+.ibexa-store-maincart-summary__discounts-info-toggler--collapsed .ibexa-store-maincart-summary__discounts-info-toggler-icon {
+  transform: rotate(180deg);
+}
+
+.ibexa-store-maincart {
+  display: flex;
+}
+.ibexa-store-maincart__summary-wrapper {
+  flex-grow: 0;
+  margin-left: 20px;
+}
+.ibexa-store-maincart__summary-wrapper--hidden {
+  display: none;
+}
+.ibexa-store-maincart__cart-wrapper {
+  flex-grow: 1;
+}
+.ibexa-store-maincart__cart {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f3f3f6;
+}
+.ibexa-store-maincart__header {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 12px 0 12px 24px;
+  background: #4191ff;
+  color: #ffffff;
+}
+.ibexa-store-maincart__headline {
+  font-weight: 700;
+  font-size: 16px;
+  margin-right: 48px;
+}
+.ibexa-store-maincart__empty-cart-container {
+  margin: 32px 28px;
+}
+.ibexa-store-maincart__empty-cart-container--hidden {
+  display: none;
+}
+.ibexa-store-maincart__empty-cart-headline {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
+.ibexa-store-maincart__items-counter-label, .ibexa-store-maincart__items-counter-value {
+  display: inline;
+}
+.ibexa-store-maincart__items-counter-label::after {
+  content: ":";
+}
+.ibexa-store-maincart__clear-cart-btn {
+  margin-left: auto;
+  color: #ffffff;
+}
+.ibexa-store-maincart__items-container {
+  display: grid;
+  grid-gap: 8px;
+  padding: 8px;
+}
+
+.ibexa-store-minicart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  fill: #ff4713;
+  position: relative;
+  height: 40px;
+  min-width: 30px;
+}
+.ibexa-store-minicart__image {
+  height: 14px;
+  width: 14px;
+}
+.ibexa-store-minicart__label {
+  font-size: 14px;
+  color: #ff4713;
+  margin-top: 5px;
+  text-transform: uppercase;
+}
+.ibexa-store-minicart__counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  min-width: 18px;
+  padding: 0px 6px;
+  position: absolute;
+  left: calc(50% + 3px);
+  top: -10px;
+  background: #ff4713;
+  color: #ffffff;
+  border-radius: 9px;
+  font-size: 10px;
+}
+
+.ibexa-store-checkout {
+  font-size: 16px;
+  line-height: 1.7;
+}
+.ibexa-store-checkout__content {
+  background-color: #f9f9fa;
+  color: #131c26;
+  padding: 40px;
+}
+.ibexa-store-checkout__content--no-background {
+  background-color: transparent;
+  padding: 0;
+}
+.ibexa-store-checkout__content--main {
+  background-color: #4191ff;
+  color: #ffffff;
+}
+.ibexa-store-checkout__content--summary {
+  padding: 48px;
+  margin-bottom: 72px;
+}
+.ibexa-store-checkout__content-row {
+  display: flex;
+}
+.ibexa-store-checkout__content-column {
+  flex: 1;
+}
+.ibexa-store-checkout__content-column--fixed-width {
+  flex: 0;
+}
+.ibexa-store-checkout__content-header {
+  margin: 0 0 12px;
+  font-size: 28px;
+  line-height: 36px;
+}
+.ibexa-store-checkout__content-paragraph {
+  padding-top: 12px;
+  width: 50%;
+}
+.ibexa-store-checkout__content-cta {
+  margin-top: 24px;
+}
+.ibexa-store-checkout__content-cta .ibexa-store-btn {
+  margin-right: 20px;
+  min-width: 250px;
+}
+.ibexa-store-checkout__content-cta .ibexa-store-btn--primary, .ibexa-store-checkout__content-cta .ibexa-store-btn--primary-outline-light {
+  border-color: #ffffff;
+}
+.ibexa-store-checkout__actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 40px;
+}
+.ibexa-store-checkout__actions .ibexa-store-btn {
+  min-width: 200px;
+}
+.ibexa-store-checkout__link {
+  color: #4191ff;
+  text-decoration: none;
+}
+.ibexa-store-checkout__shipping-address {
+  padding: 24px;
+}
+.ibexa-store-checkout__shipping-address label {
+  display: block;
+  margin-bottom: 4px;
+}
+.ibexa-store-checkout__form-label.ibexa-store-label {
+  font-size: 16px;
+}
+.ibexa-store-checkout__form-label.ibexa-store-label::after {
+  content: ":";
+}
+.ibexa-store-checkout .ibexa-store-top-menu .ibexa-store-container {
+  padding: 32px 0;
+}
+.ibexa-store-checkout .ibexa-store-header .ibexa-store-container {
+  display: block;
+}
+.ibexa-store-checkout .ibexa-store-choice__label {
+  font-size: 16px;
+}
+.ibexa-store-checkout .ibexa-store-notice-card {
+  margin-bottom: 30px;
+}
+
+.ibexa-store-checkout-quick-summary {
+  background-color: #f3f3f6;
+  padding: 24px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+.ibexa-store-checkout-quick-summary__label {
+  padding: 0 16px 0 8px;
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 700;
+  color: #4191ff;
+}
+.ibexa-store-checkout-quick-summary__row {
+  padding: 0 8px;
+  font-size: 16px;
+}
+.ibexa-store-checkout-quick-summary__row--right {
+  margin-left: auto;
+  margin-right: 0;
+}
+.ibexa-store-checkout-quick-summary__row label::after {
+  content: ":";
+}
+
+.ibexa-store-checkout-block {
+  width: 400px;
+}
+.ibexa-store-checkout-block__header {
+  display: flex;
+  margin-bottom: 16px;
+}
+.ibexa-store-checkout-block__header-step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #4191ff;
+  background-color: #4191ff;
+  color: #ffffff;
+}
+.ibexa-store-checkout-block__header-label {
+  font-size: 24px;
+  line-height: 32px;
+  margin: 0 0 0 8px;
+}
+.ibexa-store-checkout-block__content--dark {
+  background: #f3f3f6;
+  padding: 24px;
+}
+.ibexa-store-checkout-block__content .ibexa-store-input,
+.ibexa-store-checkout-block__content .ibexa-store-select {
+  width: 100%;
+}
+.ibexa-store-checkout-block__content-row {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+}
+.ibexa-store-checkout-block__content-row label {
+  margin-right: 8px;
+}
+.ibexa-store-checkout-block__content-row label::after {
+  content: ": ";
+}
+.ibexa-store-checkout-block__content-row:last-child {
+  margin-bottom: 0;
+}
+
+.ibexa-store-checkout-steps {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  margin: 24px 120px;
+}
+.ibexa-store-checkout-steps__separator {
+  flex: 1;
+  width: 100%;
+  height: 0;
+  border: 1px solid #cfd2d5;
+  align-self: center;
+}
+.ibexa-store-checkout-steps__separator--done {
+  border-color: #4191ff;
+}
+.ibexa-store-checkout-steps__separator:first-child {
+  display: none;
+}
+
+.ibexa-store-checkout-step {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  font-size: 14px;
+  color: #71767c;
+  background: #ffffff;
+  max-width: 25%;
+  overflow: hidden;
+  text-decoration: none;
+}
+.ibexa-store-checkout-step__number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #71767c;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.ibexa-store-checkout-step__label {
+  line-height: 24px;
+  padding-top: 8px;
+}
+.ibexa-store-checkout-step--active .ibexa-store-checkout-step__number {
+  border-color: #4191ff;
+}
+.ibexa-store-checkout-step--active .ibexa-store-checkout-step__label {
+  color: #4191ff;
+  font-weight: 600;
+}
+.ibexa-store-checkout-step--done .ibexa-store-checkout-step__number {
+  border-color: #4191ff;
+  background-color: #4191ff;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 600;
+}
+.ibexa-store-checkout-step--done .ibexa-store-checkout-step__label {
+  color: #4191ff;
+  font-weight: 600;
+}
+.ibexa-store-checkout-step--done:hover .ibexa-store-checkout-step__number {
+  border-color: #275799;
+  background-color: #275799;
+}
+.ibexa-store-checkout-step--done:hover .ibexa-store-checkout-step__label {
+  color: #275799;
+}
+
+.ibexa-store-checkout-order-summary {
+  background-color: #f9f9fa;
+  padding: 24px;
+  font-size: 14px;
+}
+.ibexa-store-checkout-order-summary__data {
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: 28px;
+}
+.ibexa-store-checkout-order-summary__data-column {
+  flex: 1;
+}
+.ibexa-store-checkout-order-summary__data-column:first-child {
+  margin-right: 8px;
+}
+.ibexa-store-checkout-order-summary__data-label {
+  font-weight: 700;
+}
+.ibexa-store-checkout-order-summary__data-label::after {
+  content: ":";
+}
+.ibexa-store-checkout-order-summary__item {
+  display: flex;
+  background-color: #ffffff;
+  padding: 16px;
+  margin-bottom: 8px;
+}
+.ibexa-store-checkout-order-summary__item:last-child {
+  margin-bottom: 0;
+}
+.ibexa-store-checkout-order-summary__item-content {
+  flex: 1;
+  display: flex;
+  min-height: 65px;
+}
+.ibexa-store-checkout-order-summary__item-thumbnail-image {
+  grid-area: image;
+  object-fit: contain;
+  width: 120px;
+  height: 110px;
+}
+.ibexa-store-checkout-order-summary__item-code {
+  color: #71767c;
+}
+.ibexa-store-checkout-order-summary__item-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+.ibexa-store-checkout-order-summary__item-single-data {
+  text-align: left;
+  flex: 0;
+  padding: 0 16px;
+}
+.ibexa-store-checkout-order-summary__item-count {
+  flex: 0;
+  padding-bottom: 16px;
+}
+.ibexa-store-checkout-order-summary__item-count label::after {
+  content: ":";
+}
+.ibexa-store-checkout-order-summary__item-net {
+  display: flex;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ibexa-store-checkout-order-summary__item-net-current {
+  font-weight: 700;
+}
+.ibexa-store-checkout-order-summary__item-summary-data {
+  flex: 0;
+  text-align: right;
+  min-width: 200px;
+}
+.ibexa-store-checkout-order-summary__item-subtotal {
+  font-weight: 700;
+  padding-bottom: 8px;
+}
+.ibexa-store-checkout-order-summary__item-subtotal-net {
+  display: inline;
+}
+.ibexa-store-checkout-order-summary__item-subtotal-net {
+  font-size: 24px;
+  font-weight: 600;
+  color: #4191ff;
+}
+
+.ibexa-store-checkout-price-summary {
+  width: 400px;
+  padding: 24px;
+  margin-left: 20px;
+  background-color: #f9f9fa;
+}
+.ibexa-store-checkout-price-summary__header {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 700;
+  margin: 0;
+}
+.ibexa-store-checkout-price-summary__content {
+  padding: 32px 0;
+}
+.ibexa-store-checkout-price-summary__content-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  line-height: 21px;
+  padding-bottom: 8px;
+}
+.ibexa-store-checkout-price-summary__content-row--bold {
+  font-weight: 700;
+}
+.ibexa-store-checkout-price-summary__content-row--total {
+  font-size: 24px;
+  line-height: 31px;
+  font-weight: 700;
+  color: #4191ff;
+}
+.ibexa-store-checkout-price-summary__content-row-label::after {
+  content: ":";
+}
+.ibexa-store-checkout-price-summary__action-info {
+  margin-top: 0;
+  font-size: 14px;
+  color: #71767c;
+}
+.ibexa-store-checkout-price-summary__action-btns .ibexa-store-btn {
+  width: 100%;
+}

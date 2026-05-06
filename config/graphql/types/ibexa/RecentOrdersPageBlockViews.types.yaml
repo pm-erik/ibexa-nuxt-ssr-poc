@@ -1,0 +1,7 @@
+RecentOrdersPageBlockViews:
+    type: enum
+    config:
+        values:
+            default:
+                value: '@ibexadesign/order_management/dashboard/blocks/recent_orders.html.twig'
+                description: 'Default block layout'
