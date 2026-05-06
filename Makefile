@@ -93,6 +93,7 @@ page: ## curl /api/v1/pages/$$ID (default 72; override with `make page ID=2`)
 .PHONY: urls
 urls: ## print useful urls
 	@echo "  symfony / api : $(HOST_URL)"
+	@echo "  swagger ui    : $(HOST_URL)/api/doc"
 	@echo "  openapi spec  : $(HOST_URL)/api/doc.json"
 	@echo "  page dto      : $(HOST_URL)/api/v1/pages/$(ID)"
 	@echo "  preview html  : $(HOST_URL)/_preview/pages/$(ID)"

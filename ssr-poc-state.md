@@ -134,6 +134,7 @@ frontend/
 
 | endpoint | purpose | controller / source |
 |---|---|---|
+| `GET /api/doc` | swagger ui (browse + try the spec) | nelmio |
 | `GET /api/doc.json` | openapi spec, scoped to `^/api/v1` | nelmio |
 | `GET /api/v1/pages/{locationId}` | flat `PageDto` json | `App\Controller\Api\PageController` |
 | `GET /_preview/pages/{locationId}` | standalone editor preview html (page-data mode) | `App\Controller\PageBuilderPreviewController` |
@@ -208,7 +209,6 @@ vue devtools must be opened via right-click *inside* the page-builder iframe →
 | css strategy (signal #3) | **pending decision** | three options: (a) encore-as-authority + nuxt loads static artifact, (b) shared scss source compiled by both, (c) tailwind utilities only. blocks render unstyled until decided. |
 | visual regression tests | deferred | per plan §10.4 — phase 2 ergonomic |
 | ci diff check on `/api/doc.json` | deferred | phase 2 ergonomic |
-| swagger ui at `/api/doc` | available, not enabled | uncomment in `config/routes/nelmio_api_doc.yaml` if needed |
 | remove legacy nitro proxy at `frontend/server/api/ibexa/v2/[...path].ts` | unused, can be deleted | not blocking |
 | second block type | not done | richtext is the only mapped block; adding e.g. embed proves the registry pattern scales (low risk, high signal) |
 | draft content in iframe | works because ibexa renders the draft via its own twig pipeline; our `app_page_dto` reads from the in-render `Content` (which IS the draft) | no change needed |
