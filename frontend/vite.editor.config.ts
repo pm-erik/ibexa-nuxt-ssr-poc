@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
       cssCodeSplit: false,
       manifest: true,
       sourcemap: isDev,
-      rolldownOptions: {
+      rollupOptions: {
         input: fileURLToPath(new URL('./entries/editor.ts', import.meta.url)),
         output: {
           entryFileNames: 'main.js',
