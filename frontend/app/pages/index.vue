@@ -1,15 +1,25 @@
 <script setup lang="ts">
-const { data, error } = await useAsyncData('ibexa-root', () =>
-  $fetch('/api/ibexa/v2/content/locations/1/2', {
-    headers: { Accept: 'application/vnd.ibexa.api.Location+json' }
+import type { components } from '~/types/api'
+import PageRenderer from '~/components/PageRenderer.vue'
+
+type PageDto = components['schemas']['PageDto']
+
+const client = useApiClient()
+
+const { data: page, error } = await useAsyncData<PageDto>('home-page', async () => {
+  const { data, error } = await client.GET('/api/v1/pages/{locationId}', {
+    params: { path: { locationId: 72 } },
   })
-)
+  if (error) {
+    throw createError({ statusCode: 502, statusMessage: 'failed to load page dto' })
+  }
+  return data!
+})
 </script>
 
 <template>
   <main>
-    <h1>ibexa content via nuxt SSR (nitro proxy)</h1>
     <p v-if="error">error: {{ error.message }}</p>
-    <pre v-else>{{ data }}</pre>
+    <PageRenderer v-else-if="page" :page="page" />
   </main>
 </template>

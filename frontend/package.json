@@ -7,11 +7,22 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "api:types": "openapi-typescript $IBEXA_INTERNAL_URL/api/doc.json -o app/types/api.d.ts",
+    "build:editor": "vite build -c vite.editor.config.ts",
+    "dev:editor": "vite build -c vite.editor.config.ts --mode development --watch"
   },
   "dependencies": {
     "nuxt": "^4.4.4",
+    "openapi-fetch": "^0.17.0",
     "vue": "^3.5.33",
     "vue-router": "^5.0.6"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.6",
+    "openapi-typescript": "^7.13.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.10",
+    "vite-plugin-vue-devtools": "^8.1.1"
   }
 }

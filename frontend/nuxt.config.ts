@@ -6,6 +6,11 @@ export default defineNuxtConfig({
     host: '0.0.0.0',
     port: 3000
   },
+  vite: {
+    server: {
+      allowedHosts: true
+    }
+  },
   runtimeConfig: {
     ibexaInternalUrl: process.env.IBEXA_INTERNAL_URL || 'http://127.0.0.1',
     public: {
