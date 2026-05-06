@@ -1,0 +1,10 @@
+# Higher-priority field-template override for ezlandingpage.
+# Stock ibexa registers ezlandingpage.html.twig at priority 0 and
+# admin_ezlandingpage.html.twig at priority 10 (admin_group). Our page-builder
+# iframe runs under the `site` siteaccess (in the `default` group), so we
+# register at default with priority 100 to win over the stock template.
+ibexa:
+    system:
+        default:
+            field_templates:
+                - { template: 'page_builder/fields/ezlandingpage.html.twig', priority: 100 }

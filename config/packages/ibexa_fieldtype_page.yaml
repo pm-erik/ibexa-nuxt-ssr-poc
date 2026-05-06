@@ -1,0 +1,12 @@
+# Override page-builder block templates to be thin vue mount markers.
+# Ibexa merges these views with the ones declared in
+# vendor/ibexa/fieldtype-page/.../config/blocks.yaml — same view name (default)
+# means the template path here wins.
+ibexa_fieldtype_page:
+    blocks:
+        richtext:
+            views:
+                default:
+                    name: 'Default view (vue marker)'
+                    template: 'page_builder/blocks/richtext.html.twig'
+                    priority: 0

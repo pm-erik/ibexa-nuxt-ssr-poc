@@ -1,0 +1,12 @@
+{% extends "@!IbexaFieldTypePage/fields/ezlandingpage.html.twig" %}
+
+{% block ezlandingpage_field %}
+    {{ parent() }}
+    {% if parameters.editorial_mode %}
+        {% set page_dto = app_page_dto(content) %}
+        {% if page_dto %}
+            <script id="page-data" type="application/json">{{ page_dto|app_json_for_script }}</script>
+        {% endif %}
+        <script type="module" src="{{ asset('build/editor/main.js') }}"></script>
+    {% endif %}
+{% endblock %}
