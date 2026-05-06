@@ -143,86 +143,33 @@ frontend/
 
 ## how to run
 
-assumes ddev project is started.
+all common commands are in the `Makefile` — run `make help` for the list. the most-used:
 
-### nuxt dev (public site)
+| target | what |
+|---|---|
+| `make up` | start ddev |
+| `make install` | composer + frontend yarn install |
+| `make nuxt` | nuxt dev server (public site, port 3000) |
+| `make editor-dev` | editor bundle in watch mode + vue devtools enabled |
+| `make editor-build` | production editor bundle |
+| `make types` | regenerate `frontend/app/types/api.d.ts` from `/api/doc.json` |
+| `make cc` | symfony cache clear (after php / template / config changes) |
 
-```sh
-ddev exec --dir /var/www/html/frontend yarn dev
-# nuxt listens on 0.0.0.0:3000 inside the web container
-# host port mapping via ddev web_extra_exposed_ports
-```
-
-### regenerate ts types from openapi spec
-
-```sh
-ddev exec --dir /var/www/html/frontend bash -c \
-  'IBEXA_INTERNAL_URL=http://127.0.0.1 yarn api:types'
-```
-
-### editor bundle — production build
-
-```sh
-ddev exec --dir /var/www/html/frontend yarn build:editor
-# output: public/build/editor/main.js  (vue prod runtime, no devtools, no sourcemap)
-```
-
-### editor bundle — dev workflow (auto-rebuild + vue devtools attach)
-
-```sh
-ddev exec --dir /var/www/html/frontend yarn dev:editor
-# vite build --watch --mode development
-# adds source map, flips __VUE_PROD_DEVTOOLS__ → true so vue devtools attach inside the iframe
-# refresh the page-builder iframe to pick up changes
-```
-
-vue devtools must be opened via right-click *inside* the iframe → inspect (devtools attaches per browser frame).
-
-### symfony cache clear (after php / template / config changes)
-
-```sh
-ddev exec php bin/console cache:clear --env=dev
-```
+vue devtools must be opened via right-click *inside* the page-builder iframe → inspect (devtools attaches per browser frame).
 
 ## how to verify
 
-1. **openapi spec served**:
-   `curl https://ibexa-nuxt-ssr-poc.ddev.site/api/doc.json | python3 -m json.tool | head -40`
-   should show the spec with `PageDto`/`ZoneDto`/`BlockDto` schemas.
+1. **openapi spec**: `make spec` — should show the spec with `PageDto`/`ZoneDto`/`BlockDto` schemas.
 
-2. **dto endpoint with the seeded richtext page**:
-   `curl https://ibexa-nuxt-ssr-poc.ddev.site/api/v1/pages/72 | python3 -m json.tool`
-   should return:
-   ```json
-   {
-     "locationId": 72,
-     "contentId": 71,
-     "layout": "default",
-     "title": "poc landing page",
-     "zones": [{
-       "id": "...",
-       "name": "default",
-       "blocks": [{
-         "id": "...",
-         "type": "richtext",
-         "view": "default",
-         "name": "test richtext block",
-         "attributes": {
-           "html": "<h1>test block for richtext rendering</h1><p>this is a test block</p>\n"
-         }
-       }]
-     }]
-   }
-   ```
+2. **dto endpoint** for the seeded richtext page: `make page` (defaults to `ID=72`) — should return a `PageDto` with the richtext block's `attributes.html` containing `<h1>test block for richtext rendering</h1><p>this is a test block</p>`.
 
-3. **standalone editor preview**:
-   open `https://ibexa-nuxt-ssr-poc.ddev.site/_preview/pages/72` in a browser. status bar at top + below it (rendered by vue): `<h1>poc landing page</h1>`, the zone heading, and the rendered richtext html.
+3. **standalone editor preview**: open `https://ibexa-nuxt-ssr-poc.ddev.site/_preview/pages/72` in a browser. status bar at top + below it (vue-rendered): page title, zone heading, the richtext html.
 
-4. **in-pipeline editor — the headline result**:
-   log into ibexa admin, edit "poc landing page" (location 72) in the page-builder. the iframe content is rendered by *ibexa's* pipeline, but the richtext block markup is now `<div data-block-vue="richtext" data-block-id="…">…vue-rendered…</div>` — our `RichtextBlock.vue` mounted via `EditorRoot.vue` reading the inlined `#page-data`. byte-identical html to what nuxt SSR produces.
+4. **in-pipeline editor — the headline result**: log into ibexa admin, edit "poc landing page" (location 72) in the page-builder. the iframe content is rendered by *ibexa's* pipeline, but the richtext block markup is now `<div data-block-vue="richtext" data-block-id="…">…vue-rendered…</div>` — our `RichtextBlock.vue` mounted via `EditorRoot.vue` reading the inlined `#page-data`. byte-identical html to what nuxt SSR produces.
 
-5. **nuxt SSR (public site)**:
-   open the nuxt url (`ddev describe | grep 3000`). same `RichtextBlock.vue` renders — view-source shows fully-rendered html (server-side).
+5. **nuxt SSR (public site)**: open the nuxt url (`make describe`, look for the host port mapped to container 3000). same `RichtextBlock.vue` renders — view-source shows fully-rendered html (server-side).
+
+6. **bonus** — `make config-blocks` and `make config-fields` confirm our ibexa template overrides actually merged into the runtime config.
 
 ## key versions
 
