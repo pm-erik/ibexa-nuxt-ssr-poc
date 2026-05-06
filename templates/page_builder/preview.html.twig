@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>preview · {{ page.title }}</title>
+</head>
+<body>
+    <div style="background:#222;color:#eee;padding:6px 12px;font-family:monospace;font-size:12px;">
+        editor preview · location {{ page.locationId }} · content {{ page.contentId }} · layout <code>{{ page.layout }}</code>
+    </div>
+
+    <script id="page-data" type="application/json">{{ page|json_encode|replace({'</': '<\\/'})|raw }}</script>
+
+    <div id="page-builder-app"></div>
+
+    <script type="module" src="{{ asset('build/editor/main.js') }}"></script>
+</body>
+</html>
