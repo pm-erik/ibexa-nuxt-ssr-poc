@@ -1,0 +1,9 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: ibexa-nuxt-ssr-poc — domain api
+            description: flat dto api over ibexa, consumed by nuxt ssr.
+            version: 0.1.0
+    areas:
+        path_patterns:
+            - ^/api/v1

@@ -20,5 +20,23 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Mapper\IbexaRichtextBlockMapper:
+        tags:
+            - { name: 'app.block_mapper', priority: 100 }
+
+    App\Mapper\PassthroughBlockMapper:
+        tags:
+            - { name: 'app.block_mapper', priority: -1000 }
+
+    App\Mapper\IbexaPageMapper:
+        arguments:
+            $blockMappers: !tagged_iterator 'app.block_mapper'
+
+    App\Repository\PageRepositoryInterface: '@App\Repository\IbexaPageRepository'

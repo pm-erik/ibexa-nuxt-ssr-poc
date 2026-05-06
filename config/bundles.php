@@ -97,4 +97,5 @@ return [
     KnpU\OAuth2ClientBundle\KnpUOAuth2ClientBundle::class => ['all' => true],
     Ibexa\Bundle\Connect\IbexaConnectBundle::class => ['all' => true],
     Ibexa\Bundle\ConnectorQualifio\IbexaConnectorQualifioBundle::class => ['all' => true],
+    Nelmio\ApiDocBundle\NelmioApiDocBundle::class => ['all' => true],
 ];
