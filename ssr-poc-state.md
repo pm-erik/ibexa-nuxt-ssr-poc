@@ -6,7 +6,7 @@ this is a clean-playground proof of concept validating the architectural claims 
 
 ## what's been built
 
-end-to-end dual rendering pipeline:
+**three render paths, one mapper, one component tree.** ibexa's actual page-builder iframe now hydrates the same vue components that nuxt ssr renders on the public site.
 
 ```
                                         ┌──────────────────────────────┐
@@ -15,42 +15,45 @@ end-to-end dual rendering pipeline:
                                         │   ibexa content → PageDto    │
                                         └──────────────┬───────────────┘
                                                        │
-                              ┌────────────────────────┴────────────────────────┐
-                              │                                                 │
-                              ▼                                                 ▼
-                ┌──────────────────────────┐                       ┌──────────────────────────┐
-                │  /api/v1/pages/{id}      │                       │  /_preview/pages/{id}    │
-                │  json over rest          │                       │  twig shell + page-data  │
-                │                          │                       │  + editor bundle         │
-                └──────────────┬───────────┘                       └──────────────┬───────────┘
-                               │                                                  │
-                               │  openapi-fetch typed client                      │  <script type="module">
-                               ▼                                                  ▼
-                ┌──────────────────────────┐                       ┌──────────────────────────┐
-                │  nuxt SSR (port 3000)    │                       │  vue mount (browser)     │
-                │  app/pages/index.vue     │                       │  entries/editor.ts       │
-                └──────────────┬───────────┘                       └──────────────┬───────────┘
-                               │                                                  │
-                               └─────────────────┬────────────────────────────────┘
-                                                 │  both render the same:
-                                                 ▼
-                                ┌─────────────────────────────────────┐
-                                │  PageRenderer.vue                   │
-                                │  + components/blocks/{Richtext,…}   │
-                                │  shared between both pipelines      │
-                                └─────────────────────────────────────┘
+              ┌────────────────────────────────────────┼────────────────────────────────────────┐
+              │                                        │                                        │
+              ▼                                        ▼                                        ▼
+  ┌──────────────────────────┐           ┌──────────────────────────┐           ┌─────────────────────────────────┐
+  │  /api/v1/pages/{id}      │           │  /_preview/pages/{id}    │           │  ibexa page-builder iframe      │
+  │  json over rest          │           │  twig shell + page-data  │           │  (admin/content/preview/...)    │
+  │                          │           │  + editor bundle         │           │  twig overrides emit page-data  │
+  │                          │           │                          │           │  + per-block markers + bundle   │
+  └─────────────┬────────────┘           └─────────────┬────────────┘           └────────────────┬────────────────┘
+                │                                      │                                         │
+                │ openapi-fetch                        │ <script type="module">                  │ <script type="module">
+                │ typed client                         │ (page-data mode)                        │ (marker mode)
+                ▼                                      ▼                                         ▼
+  ┌──────────────────────────┐           ┌──────────────────────────┐           ┌─────────────────────────────────┐
+  │  nuxt SSR (port 3000)    │           │  PageRenderer mounts     │           │  EditorRoot walks markers,      │
+  │  app/pages/index.vue     │           │  full PageDto tree       │           │  teleports block components     │
+  │  uses PageRenderer       │           │  into #page-builder-app  │           │  into [data-block-vue] divs     │
+  └─────────────┬────────────┘           └─────────────┬────────────┘           └────────────────┬────────────────┘
+                │                                      │                                         │
+                └──────────────────────────────────────┼─────────────────────────────────────────┘
+                                                       │  all three render the same:
+                                                       ▼
+                                    ┌─────────────────────────────────────┐
+                                    │  PageRenderer.vue / EditorRoot.vue  │
+                                    │  + components/blocks/{Richtext,…}   │
+                                    │  shared between all consumers       │
+                                    └─────────────────────────────────────┘
 ```
 
 ## the 4 signals — status
 
 | signal | claim | status |
 |---|---|---|
-| #1 | block dto contract works | structurally done; richtext mapper wired but no seeded richtext block to exercise visually |
-| #2 | dual rendering produces visually-identical output | **stronger than the original framing** — both pipelines now share `PageRenderer.vue` + block components, so visual identity is true by construction, not by post-hoc screenshot diff |
-| #3 | shared css artifact is feasible | not addressed; decision pending (encore-as-authority vs shared-scss-source vs tailwind-utilities) |
-| #4 | editor preview is independent | done; `/api/v1/pages/{id}` and `/_preview/pages/{id}` coexist as separate routes, share only `IbexaPageMapper` upstream |
+| #1 | block dto contract works | **done — visually exercised.** location 72 ("poc landing page") has a real richtext block; `/api/v1/pages/72` returns the flat `PageDto` with rendered html. |
+| #2 | dual rendering produces visually-identical output | **done — visually demonstrated inside ibexa's actual page-builder iframe.** the same `RichtextBlock.vue` renders in nuxt SSR (public site) AND inside the editor iframe. by construction (single source tree, two bundles) — not by post-hoc screenshot diff. |
+| #3 | shared css artifact is feasible | not addressed; decision pending (encore-as-authority vs shared-scss-source vs tailwind-utilities). blocks render unstyled. |
+| #4 | editor preview is independent | done. `/api/v1/pages/{id}` (nuxt-side json), `/_preview/pages/{id}` (standalone editor sanity-probe) and the in-pipeline ibexa-iframe integration all coexist. they share `IbexaPageMapper` upstream and the vue component tree downstream; ibexa itself is not modified. |
 
-3/4 structurally complete. only css decision (signal #3) and a seeded richtext block (closing tail of #1) remain.
+3/4 done end-to-end. only css decision (signal #3) remains.
 
 ## what's where
 
@@ -65,11 +68,13 @@ src/
 ├── Mapper/
 │   ├── BlockMapperInterface.php             tagged service contract
 │   ├── IbexaPageMapper.php                  orchestrator, !tagged_iterator
-│   ├── IbexaRichtextBlockMapper.php         priority 100; uses ibexa_richtext_to_html5
-│   └── PassthroughBlockMapper.php           priority -1000 fallback
+│   ├── IbexaRichtextBlockMapper.php         priority 100; injects RichTextConverterExtension directly
+│   └── PassthroughBlockMapper.php           priority -1000 fallback (private normalize() helper)
+├── Twig/
+│   └── PageDtoExtension.php                 twig fn `app_page_dto(content)` + filter `app_json_for_script`
 └── Controller/
     ├── Api/PageController.php               GET /api/v1/pages/{id} → json
-    └── PageBuilderPreviewController.php     GET /_preview/pages/{id} → twig
+    └── PageBuilderPreviewController.php     GET /_preview/pages/{id} → twig (sanity probe)
 ```
 
 interface binding lives as a single line in `config/services.yaml`:
@@ -80,35 +85,50 @@ App\Repository\PageRepositoryInterface: '@App\Repository\IbexaPageRepository'
 
 block mapper registration is one line per implementation, also in `config/services.yaml`. swap = config change.
 
+### twig overrides + ibexa config (the in-pipeline integration)
+
+```
+templates/page_builder/
+├── preview.html.twig                        standalone shell (page-data mode of bundle)
+├── blocks/richtext.html.twig                THIN MARKER: <div data-block-vue="richtext" data-block-id="…">
+└── fields/ezlandingpage.html.twig           extends parent, injects #page-data + bundle script tag
+```
+
+```
+config/packages/
+├── nelmio_api_doc.yaml                      openapi spec scope: ^/api/v1
+├── ibexa_fieldtype_page.yaml                richtext block view → page_builder/blocks/richtext.html.twig
+└── app_ibexa_overrides.yaml                 ezlandingpage field template, priority 100
+```
+
+ibexa block + field templates do NOT honor symfony's bundle-override path. both must be registered through ibexa's own config keys (see "architectural decisions" below).
+
 ### frontend (`frontend/`)
 
 ```
 frontend/
 ├── app/
 │   ├── components/
-│   │   ├── PageRenderer.vue                 shared root for both pipelines
+│   │   ├── PageRenderer.vue                 nuxt + standalone preview: full page tree from PageDto
+│   │   ├── EditorRoot.vue                   in-pipeline: walks markers, teleports per-marker block
 │   │   └── blocks/
 │   │       ├── index.ts                     type → component registry
 │   │       ├── RichtextBlock.vue            v-html the rendered html5 from the mapper
 │   │       └── UnknownBlock.vue             fallback dump of attributes
-│   ├── pages/index.vue                      nuxt SSR page; uses PageRenderer
+│   ├── pages/index.vue                      nuxt SSR page; locationId 72; uses PageRenderer
 │   ├── composables/useApiClient.ts          env-aware openapi-fetch typed client
 │   └── types/api.d.ts                       codegened from /api/doc.json
-├── entries/editor.ts                        editor bundle entry; parses #page-data
-├── server/api/ibexa/v2/[...path].ts         legacy nitro proxy, unused, leave for now
-├── nuxt.config.ts
-├── vite.editor.config.ts                    second vite config for editor bundle
-└── package.json
+├── entries/editor.ts                        DUAL-MODE: marker mode (in-pipeline) | page-data mode (standalone)
+├── server/api/ibexa/v2/[...path].ts         legacy nitro proxy, unused, kept for now
+├── nuxt.config.ts                           allowedHosts: ['ibexa-nuxt-ssr-poc.ddev.site']
+├── vite.editor.config.ts                    second vite config; dev mode flips __VUE_PROD_DEVTOOLS__
+└── package.json                             scripts: dev, build, build:editor, dev:editor, api:types
 ```
 
-### twig
+### built artifacts (`public/build/editor/`)
 
-`templates/page_builder/preview.html.twig` — the editor shell. emits status bar + `<script id="page-data" type="application/json">` + `<div id="page-builder-app">` + bundle script tag.
-
-### built artifacts
-
-- `public/build/editor/main.js` — editor bundle, ~61 kb (gzip ~24 kb)
-- `public/build/editor/.vite/manifest.json`
+- `main.js` — editor bundle. ~65.84 kb prod (gzip 25.85 kb) / ~67.90 kb dev (with source map)
+- `.vite/manifest.json`
 
 ## endpoints
 
@@ -116,7 +136,8 @@ frontend/
 |---|---|---|
 | `GET /api/doc.json` | openapi spec, scoped to `^/api/v1` | nelmio |
 | `GET /api/v1/pages/{locationId}` | flat `PageDto` json | `App\Controller\Api\PageController` |
-| `GET /_preview/pages/{locationId}` | editor-side preview html | `App\Controller\PageBuilderPreviewController` |
+| `GET /_preview/pages/{locationId}` | standalone editor preview html (page-data mode) | `App\Controller\PageBuilderPreviewController` |
+| `GET /admin/content/preview/{contentId}/{versionNo}/{language}/site_access/{sa}` | ibexa's own page-builder iframe url; our twig overrides hijack the render | ibexa (we override the templates only) |
 | `GET /build/editor/main.js` | editor bundle | static asset, vite-built |
 | `GET /` (nuxt, port 3000) | nuxt SSR public page | `frontend/app/pages/index.vue` |
 
@@ -139,14 +160,25 @@ ddev exec --dir /var/www/html/frontend bash -c \
   'IBEXA_INTERNAL_URL=http://127.0.0.1 yarn api:types'
 ```
 
-### rebuild editor bundle
+### editor bundle — production build
 
 ```sh
 ddev exec --dir /var/www/html/frontend yarn build:editor
-# output: public/build/editor/main.js
+# output: public/build/editor/main.js  (vue prod runtime, no devtools, no sourcemap)
 ```
 
-### symfony cache clear (after php changes)
+### editor bundle — dev workflow (auto-rebuild + vue devtools attach)
+
+```sh
+ddev exec --dir /var/www/html/frontend yarn dev:editor
+# vite build --watch --mode development
+# adds source map, flips __VUE_PROD_DEVTOOLS__ → true so vue devtools attach inside the iframe
+# refresh the page-builder iframe to pick up changes
+```
+
+vue devtools must be opened via right-click *inside* the iframe → inspect (devtools attaches per browser frame).
+
+### symfony cache clear (after php / template / config changes)
 
 ```sh
 ddev exec php bin/console cache:clear --env=dev
@@ -156,31 +188,41 @@ ddev exec php bin/console cache:clear --env=dev
 
 1. **openapi spec served**:
    `curl https://ibexa-nuxt-ssr-poc.ddev.site/api/doc.json | python3 -m json.tool | head -40`
-   should show the full spec with `PageDto`/`ZoneDto`/`BlockDto` schemas.
+   should show the spec with `PageDto`/`ZoneDto`/`BlockDto` schemas.
 
-2. **dto endpoint**:
-   `curl https://ibexa-nuxt-ssr-poc.ddev.site/api/v1/pages/2 | python3 -m json.tool`
+2. **dto endpoint with the seeded richtext page**:
+   `curl https://ibexa-nuxt-ssr-poc.ddev.site/api/v1/pages/72 | python3 -m json.tool`
    should return:
    ```json
    {
-     "locationId": 2,
-     "contentId": 52,
+     "locationId": 72,
+     "contentId": 71,
      "layout": "default",
-     "title": "Ibexa Digital Experience Platform",
-     "zones": [{"id": "1", "name": "default", "blocks": []}]
+     "title": "poc landing page",
+     "zones": [{
+       "id": "...",
+       "name": "default",
+       "blocks": [{
+         "id": "...",
+         "type": "richtext",
+         "view": "default",
+         "name": "test richtext block",
+         "attributes": {
+           "html": "<h1>test block for richtext rendering</h1><p>this is a test block</p>\n"
+         }
+       }]
+     }]
    }
    ```
 
-3. **editor preview html**:
-   open `https://ibexa-nuxt-ssr-poc.ddev.site/_preview/pages/2` in a browser. should show the dark status bar at top + below it (rendered by vue):
-   - `<h1>Ibexa Digital Experience Platform</h1>`
-   - `location 2 · content 52 · layout default`
-   - `zone: default`, `(no blocks)`
+3. **standalone editor preview**:
+   open `https://ibexa-nuxt-ssr-poc.ddev.site/_preview/pages/72` in a browser. status bar at top + below it (rendered by vue): `<h1>poc landing page</h1>`, the zone heading, and the rendered richtext html.
 
-   if you see only the status bar and nothing below, the editor bundle didn't mount — check devtools console.
+4. **in-pipeline editor — the headline result**:
+   log into ibexa admin, edit "poc landing page" (location 72) in the page-builder. the iframe content is rendered by *ibexa's* pipeline, but the richtext block markup is now `<div data-block-vue="richtext" data-block-id="…">…vue-rendered…</div>` — our `RichtextBlock.vue` mounted via `EditorRoot.vue` reading the inlined `#page-data`. byte-identical html to what nuxt SSR produces.
 
-4. **nuxt SSR**:
-   open `http://localhost:<ddev-port-for-3000>/` (find via `ddev describe | grep 3000`). same content as the editor preview, but rendered server-side (view-source shows fully-rendered html).
+5. **nuxt SSR (public site)**:
+   open the nuxt url (`ddev describe | grep 3000`). same `RichtextBlock.vue` renders — view-source shows fully-rendered html (server-side).
 
 ## key versions
 
@@ -192,7 +234,7 @@ ddev exec php bin/console cache:clear --env=dev
 | nelmio/api-doc-bundle | ^4.23 (resolved 4.38.7) |
 | nuxt | 4.4.4 |
 | vue | 3.5.x |
-| vite | 8.0.10 |
+| vite | 8.0.10 (uses `rolldownOptions`, not `rollupOptions`) |
 | @vitejs/plugin-vue | 6.0.6 |
 | openapi-fetch | 0.17.x |
 | openapi-typescript | 7.13.x |
@@ -200,27 +242,30 @@ ddev exec php bin/console cache:clear --env=dev
 
 ## architectural decisions worth noting
 
-1. **the dto is the contract; both renderers are dumb consumers.** `IbexaPageMapper` is the only file that bridges ibexa shapes to domain shapes. swapping the cms is a mapper rewrite + interface binding change in `services.yaml`. nothing else.
+1. **the dto is the contract; all renderers are dumb consumers.** `IbexaPageMapper` is the only file that bridges ibexa shapes to domain shapes. it runs once per render — exposed via the api endpoint (json) AND via a twig function `app_page_dto(content)` that inlines the same dto into the editor iframe as `<script id="page-data">`. swapping the cms is a mapper rewrite + interface binding change in `services.yaml`. nothing else.
 
-2. **single source for vue components.** `frontend/app/components/blocks/` is the only place a block's visual representation is defined. nuxt SSR imports it. editor bundle imports it. dual rendering at the build layer is one tree, two bundles. (option (b) "nuxt project owns both" from the design discussion — option (a) "encore owns the editor" was rejected to avoid touching ibexa-encore conventions; option (c) "workspace with shared blocks package" was rejected as overkill for two consumers.)
+2. **single source for vue components.** `frontend/app/components/blocks/` is the only place a block's visual representation is defined. nuxt SSR imports it. editor bundle imports it. dual rendering at the build layer is one tree, two vite bundles. (option (b) "nuxt project owns both" — option (a) "encore owns the editor" was rejected to avoid touching ibexa-encore conventions; option (c) "workspace with shared blocks package" was rejected as overkill for two consumers.)
 
-3. **single vue app per editor iframe**, not per block. the bundle parses one page-level json payload (`<script id="page-data">`), mounts a single `createApp` at `<div id="page-builder-app">`, and walks the dto from there. avoids the "n parallel vue apps with no shared reactivity context" problem.
+3. **single vue app per editor iframe**, not per block. `EditorRoot.vue` mounts once, walks `[data-block-vue]` markers, and renders block components into them via `<Teleport>`. shared reactivity context, shared plugin tree. avoids the "n parallel vue apps" anti-pattern.
 
-4. **openapi spec is code-first**. nelmio attributes on dtos and controllers produce `/api/doc.json`. ts types are codegened from there into `frontend/app/types/api.d.ts`. spec-first wasn't chosen because the dto-driven facade naturally produces a clean spec; spec-first would add discipline overhead without payoff at this scale.
+4. **openapi spec is code-first**. nelmio attributes on dtos and controllers produce `/api/doc.json`. ts types are codegened into `frontend/app/types/api.d.ts`. the dto-driven facade naturally produces a clean spec; spec-first would add discipline overhead without payoff at this scale.
 
-5. **ibexa stays unmodified.** no patches, forks, admin-ui mods, or dependence on undocumented internals. the facade pattern uses ibexa's public php api only (`ContentService`, `LocationService`, page-builder field-type contracts).
+5. **ibexa stays unmodified.** no patches, forks, admin-ui mods, or dependence on undocumented internals. the facade pattern uses ibexa's public php api (`ContentService`, `LocationService`, page-builder field-type contracts). the in-pipeline integration uses official extension points (template config + twig extension).
+
+6. **ibexa template overrides DON'T use symfony's bundle-override path.** putting an override at `templates/bundles/IbexaFieldTypePageBundle/...` is silently ignored. block templates must be registered via `ibexa_fieldtype_page.blocks.<type>.views.<view>.template` (same view name wins by config-merge); field templates via `ibexa.system.<sa>.field_templates` as a priority-ordered list (higher priority wins). burned ~30 minutes on this; documented in detail.
 
 ## what's deferred / pending
 
 | item | status | note |
 |---|---|---|
-| seed a real richtext block in some content | pending | needed to visually exercise signal #1 — a one-block ibexa migration would do it |
-| css strategy (signal #3) | pending decision | three options on the table; no choice committed |
+| css strategy (signal #3) | **pending decision** | three options: (a) encore-as-authority + nuxt loads static artifact, (b) shared scss source compiled by both, (c) tailwind utilities only. blocks render unstyled until decided. |
 | visual regression tests | deferred | per plan §10.4 — phase 2 ergonomic |
 | ci diff check on `/api/doc.json` | deferred | phase 2 ergonomic |
 | swagger ui at `/api/doc` | available, not enabled | uncomment in `config/routes/nelmio_api_doc.yaml` if needed |
 | remove legacy nitro proxy at `frontend/server/api/ibexa/v2/[...path].ts` | unused, can be deleted | not blocking |
-| port to buerkert_new codebase | the actual goal | poc patterns transfer mechanically once #3 is decided and one more block is exercised |
+| second block type | not done | richtext is the only mapped block; adding e.g. embed proves the registry pattern scales (low risk, high signal) |
+| draft content in iframe | works because ibexa renders the draft via its own twig pipeline; our `app_page_dto` reads from the in-render `Content` (which IS the draft) | no change needed |
+| port to buerkert_new codebase | the actual goal | poc patterns transfer mechanically once #3 is decided and a second block is in |
 
 ## relationship to plan documents
 
