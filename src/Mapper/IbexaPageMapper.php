@@ -24,6 +24,16 @@ final class IbexaPageMapper
     {
     }
 
+    /**
+     * Map a single block to its dto. Used by the twig `app_block_dto` fn
+     * so per-block templates can inline their data — keeping editor-iframe
+     * blocks data-fresh after drag-add and re-publish.
+     */
+    public function mapStandaloneBlock(BlockValue $block): BlockDto
+    {
+        return $this->mapBlock($block);
+    }
+
     public function map(Location $location, Content $content): ?PageDto
     {
         $page = $this->extractPage($content);

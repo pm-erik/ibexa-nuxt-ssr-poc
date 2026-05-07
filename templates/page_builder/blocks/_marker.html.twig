@@ -1,0 +1,22 @@
+{# poc dual-rendering: shared block marker template.
+   thin marker div + sibling per-block data script. the data is a sibling (not
+   nested in the marker) so vue's Teleport target is pristine — no collision
+   between vue-mounted content and the data script. both elements render
+   together so ibexa's drag-add and republish bring them as a single block
+   fragment.
+
+   parameters:
+     type           - block type identifier (e.g. 'richtext', 'embed', 'video', 'contentlist')
+
+   inherited from ibexa's TemplateAttributesListener and our ExposeBlockValueSubscriber:
+     block_id       - the block's stable id
+     block_class    - editor-set block class
+     block_style    - editor-set inline style
+     _block_value   - the BlockValue, used by app_block_dto() #}
+<div class="block-{{ type }} {{ block_class }}"
+     data-block-vue="{{ type }}"
+     data-block-id="{{ block_id }}"
+     data-block-view="default"
+     {% if block_style %}style="{{ block_style|raw }}"{% endif %}>
+</div>
+<script type="application/json" data-block-data data-for="{{ block_id }}">{{ app_block_dto(_block_value)|app_json_for_script }}</script>

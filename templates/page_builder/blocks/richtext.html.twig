@@ -1,9 +1,1 @@
-{# poc dual-rendering override: thin vue mount marker, no per-block data.
-   the editor bundle reads block attributes from the page-level json inlined by
-   the ezlandingpage field template (see PageDtoExtension::pageDto). #}
-<div class="block-richtext {{ block_class }}"
-     data-block-vue="richtext"
-     data-block-id="{{ block_id }}"
-     data-block-view="default"
-     {% if block_style %}style="{{ block_style|raw }}"{% endif %}>
-</div>
+{% include 'page_builder/blocks/_marker.html.twig' with {type: 'richtext'} %}

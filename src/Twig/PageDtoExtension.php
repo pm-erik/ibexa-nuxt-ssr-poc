@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Twig;
 
+use App\Dto\BlockDto;
 use App\Dto\PageDto;
 use App\Mapper\IbexaPageMapper;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\Contracts\FieldTypePage\FieldType\LandingPage\Model\BlockValue;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -39,6 +41,7 @@ final class PageDtoExtension extends AbstractExtension
     {
         return [
             new TwigFunction('app_page_dto', [$this, 'pageDto']),
+            new TwigFunction('app_block_dto', [$this, 'blockDto']),
         ];
     }
 
@@ -69,5 +72,10 @@ final class PageDtoExtension extends AbstractExtension
         }
 
         return $this->mapper->map($location, $content);
+    }
+
+    public function blockDto(BlockValue $block): BlockDto
+    {
+        return $this->mapper->mapStandaloneBlock($block);
     }
 }
