@@ -25,3 +25,5 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 /.claude/
 /.idea/
+/dual-rendering.md
+/page-builder-concept.md
