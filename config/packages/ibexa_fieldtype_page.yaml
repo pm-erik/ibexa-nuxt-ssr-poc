@@ -10,3 +10,9 @@ ibexa_fieldtype_page:
                     name: 'Default view (vue marker)'
                     template: 'page_builder/blocks/richtext.html.twig'
                     priority: 0
+        embed:
+            views:
+                default:
+                    name: 'Default view (vue marker)'
+                    template: 'page_builder/blocks/embed.html.twig'
+                    priority: 0

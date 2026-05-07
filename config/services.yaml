@@ -33,6 +33,10 @@ services:
         tags:
             - { name: 'app.block_mapper', priority: 100 }
 
+    App\Mapper\IbexaEmbedBlockMapper:
+        tags:
+            - { name: 'app.block_mapper', priority: 100 }
+
     App\Mapper\PassthroughBlockMapper:
         tags:
             - { name: 'app.block_mapper', priority: -1000 }
@@ -40,5 +44,17 @@ services:
     App\Mapper\IbexaPageMapper:
         arguments:
             $blockMappers: !tagged_iterator 'app.block_mapper'
+
+    App\Service\ImageDataExtractor:
+        tags:
+            - { name: 'app.typed_data_extractor' }
+
+    App\Service\FileDataExtractor:
+        tags:
+            - { name: 'app.typed_data_extractor' }
+
+    App\Service\ContentSummarizer:
+        arguments:
+            $typedDataExtractors: !tagged_iterator 'app.typed_data_extractor'
 
     App\Repository\PageRepositoryInterface: '@App\Repository\IbexaPageRepository'
