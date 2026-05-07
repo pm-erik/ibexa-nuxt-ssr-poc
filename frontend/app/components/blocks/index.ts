@@ -1,8 +1,10 @@
 import type { Component } from 'vue'
+import EmbedBlock from './EmbedBlock.vue'
 import RichtextBlock from './RichtextBlock.vue'
 import UnknownBlock from './UnknownBlock.vue'
 
 const registry: Record<string, Component> = {
+  embed: EmbedBlock,
   richtext: RichtextBlock,
 }
 
