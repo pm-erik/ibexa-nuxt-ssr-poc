@@ -20,9 +20,9 @@ this is a clean-playground proof of concept validating the architectural claims 
               ▼                                        ▼                                        ▼
   ┌──────────────────────────┐           ┌──────────────────────────┐           ┌─────────────────────────────────┐
   │  /api/v1/pages/{id}      │           │  /_preview/pages/{id}    │           │  ibexa page-builder iframe      │
-  │  json over rest          │           │  twig shell + page-data  │           │  (admin/content/preview/...)    │
-  │                          │           │  + editor bundle         │           │  twig overrides emit page-data  │
-  │                          │           │                          │           │  + per-block markers + bundle   │
+  │  json over rest          │           │  DEV-ONLY: twig shell    │           │  (admin/content/preview/...)    │
+  │                          │           │  + page-data + editor    │           │  twig overrides emit page-data  │
+  │                          │           │  bundle (404 in prod)    │           │  + per-block markers + bundle   │
   └─────────────┬────────────┘           └─────────────┬────────────┘           └────────────────┬────────────────┘
                 │                                      │                                         │
                 │ openapi-fetch                        │ <script type="module">                  │ <script type="module">
@@ -51,7 +51,7 @@ this is a clean-playground proof of concept validating the architectural claims 
 | #1 | block dto contract works | **done — visually exercised.** location 72 ("poc landing page") has a real richtext block; `/api/v1/pages/72` returns the flat `PageDto` with rendered html. |
 | #2 | dual rendering produces visually-identical output | **done — visually demonstrated inside ibexa's actual page-builder iframe.** the same `RichtextBlock.vue` renders in nuxt SSR (public site) AND inside the editor iframe. by construction (single source tree, two bundles) — not by post-hoc screenshot diff. |
 | #3 | shared css artifact is feasible | not addressed; decision pending (encore-as-authority vs shared-scss-source vs tailwind-utilities). blocks render unstyled. |
-| #4 | editor preview is independent | done. `/api/v1/pages/{id}` (nuxt-side json), `/_preview/pages/{id}` (standalone editor sanity-probe) and the in-pipeline ibexa-iframe integration all coexist. they share `IbexaPageMapper` upstream and the vue component tree downstream; ibexa itself is not modified. |
+| #4 | editor preview is independent | done. `/api/v1/pages/{id}` (nuxt-side json), `/_preview/pages/{id}` (**dev-only** standalone editor sanity-probe; 404 in non-dev environments) and the in-pipeline ibexa-iframe integration all coexist. they share `IbexaPageMapper` upstream and the vue component tree downstream; ibexa itself is not modified. |
 
 3/4 done end-to-end. only css decision (signal #3) remains.
 
@@ -74,7 +74,7 @@ src/
 │   └── PageDtoExtension.php                 twig fn `app_page_dto(content)` + filter `app_json_for_script`
 └── Controller/
     ├── Api/PageController.php               GET /api/v1/pages/{id} → json
-    └── PageBuilderPreviewController.php     GET /_preview/pages/{id} → twig (sanity probe)
+    └── PageBuilderPreviewController.php     GET /_preview/pages/{id} → twig (DEV-ONLY sanity probe; 404 elsewhere)
 ```
 
 interface binding lives as a single line in `config/services.yaml`:
@@ -137,10 +137,19 @@ frontend/
 | `GET /api/doc` | swagger ui (browse + try the spec) | nelmio |
 | `GET /api/doc.json` | openapi spec, scoped to `^/api/v1` | nelmio |
 | `GET /api/v1/pages/{locationId}` | flat `PageDto` json | `App\Controller\Api\PageController` |
-| `GET /_preview/pages/{locationId}` | standalone editor preview html (page-data mode) | `App\Controller\PageBuilderPreviewController` |
+| `GET /_preview/pages/{locationId}` | **DEV-ONLY** standalone editor preview html (page-data mode); 404 in non-dev environments | `App\Controller\PageBuilderPreviewController` |
 | `GET /admin/content/preview/{contentId}/{versionNo}/{language}/site_access/{sa}` | ibexa's own page-builder iframe url; our twig overrides hijack the render | ibexa (we override the templates only) |
 | `GET /build/editor/main.js` | editor bundle | static asset, vite-built |
 | `GET /` (nuxt, port 3000) | nuxt SSR public page | `frontend/app/pages/index.vue` |
+
+### production vs dev surface
+
+production exposes only **two** render surfaces:
+
+1. nuxt SSR (public site) — consumes `/api/v1/pages/{id}`
+2. ibexa's page-builder iframe (editorial) — twig overrides hijack the render in-pipeline
+
+`/_preview/pages/{id}` is **dev-only** by design (env guard in `PageBuilderPreviewController`; 404 when `kernel.environment !== 'dev'`). it exists so the editor bundle can be iterated on without logging into admin. when porting to buerkert_new the route stays gated; do not extend production routing or dependencies for it.
 
 ## how to run
 
@@ -207,15 +216,8 @@ vue devtools must be opened via right-click *inside* the page-builder iframe →
 | item | status | note |
 |---|---|---|
 | css strategy (signal #3) | **pending decision** | three options: (a) encore-as-authority + nuxt loads static artifact, (b) shared scss source compiled by both, (c) tailwind utilities only. blocks render unstyled until decided. |
-| visual regression tests | deferred | per plan §10.4 — phase 2 ergonomic |
-| ci diff check on `/api/doc.json` | deferred | phase 2 ergonomic |
-| remove legacy nitro proxy at `frontend/server/api/ibexa/v2/[...path].ts` | unused, can be deleted | not blocking |
+| ~~remove legacy nitro proxy at `frontend/server/api/ibexa/v2/[...path].ts`~~ | **done 2026-05-07** | deleted; cors handled at backend via nelmio_cors |
+| `/_preview/pages/{id}` route | **dev-only, gated** | guarded by `kernel.environment === 'dev'` check in `PageBuilderPreviewController`; 404 in prod by design |
 | second block type | not done | richtext is the only mapped block; adding e.g. embed proves the registry pattern scales (low risk, high signal) |
 | draft content in iframe | works because ibexa renders the draft via its own twig pipeline; our `app_page_dto` reads from the in-render `Content` (which IS the draft) | no change needed |
 | port to buerkert_new codebase | the actual goal | poc patterns transfer mechanically once #3 is decided and a second block is in |
-
-## relationship to plan documents
-
-- `buerkert_new/ssr-poc-plan.md` — the plan this poc validates
-- `buerkert_new/ssr-migration-plan.md` — the bigger migration plan
-- `buerkert_new/ssr-architecture-notes.md` — the decoupling pattern (§3) implemented here verbatim
