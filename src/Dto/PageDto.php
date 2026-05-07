@@ -10,22 +10,22 @@ use OpenApi\Attributes as OA;
 #[OA\Schema(
     description: 'A page builder page, flattened to a domain-shaped tree of zones and blocks. No ibexa concepts leak into this shape.',
 )]
-final class PageDto
+final readonly class PageDto
 {
     public function __construct(
         #[OA\Property(description: 'Location id this page was loaded from.')]
-        public readonly int $locationId,
+        public int $locationId,
         #[OA\Property(description: 'Content id backing the location.')]
-        public readonly int $contentId,
+        public int $contentId,
         #[OA\Property(description: 'Layout identifier (e.g. default, two_columns).')]
-        public readonly string $layout,
+        public string $layout,
         #[OA\Property(description: 'Page title (content name).')]
-        public readonly string $title,
+        public string $title,
         #[OA\Property(
             type: 'array',
             items: new OA\Items(ref: new Model(type: ZoneDto::class)),
         )]
-        public readonly array $zones,
+        public array $zones,
     ) {
     }
 }

@@ -45,18 +45,6 @@ final class ContentSummarizer
         }
     }
 
-    public function summarizeByLocationId(int $locationId): ?ContentSummaryDto
-    {
-        try {
-            $location = $this->locationService->loadLocation($locationId);
-            $content = $this->contentService->loadContent($location->contentId);
-
-            return $this->summarizeContent($content, $location);
-        } catch (IbexaException | Throwable) {
-            return null;
-        }
-    }
-
     public function summarizeContent(Content $content, ?Location $location = null, ?MappingContext $context = null): ?ContentSummaryDto
     {
         $location ??= $this->loadMainLocation($content);
@@ -111,7 +99,6 @@ final class ContentSummarizer
             return $this->urlGenerator->generate(
                 'ibexa.url.alias',
                 ['locationId' => (int) $location->id],
-                UrlGeneratorInterface::ABSOLUTE_PATH,
             );
         } catch (Throwable) {
             return null;

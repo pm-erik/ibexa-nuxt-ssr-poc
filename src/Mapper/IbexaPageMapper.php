@@ -20,7 +20,7 @@ final class IbexaPageMapper
      * @param iterable<BlockMapperInterface> $blockMappers tagged services, ordered;
      *                                                    a passthrough fallback should come last.
      */
-    public function __construct(private iterable $blockMappers)
+    public function __construct(private readonly iterable $blockMappers)
     {
     }
 
