@@ -70,24 +70,18 @@ src/
 ├── EventSubscriber/
 │   └── ExposeBlockValueSubscriber.php       adds `_block_value` to twig render params for per-block templates
 ├── Mapper/
-│   ├── BlockMapperInterface.php             tagged service contract; mapAttributes($block, ?MappingContext)
-│   ├── MappingContext.php                   per-call collector for related content ids (→ http cache tags)
-│   ├── IbexaPageMapper.php                  orchestrator (!tagged_iterator); returns PageRenderResult{dto, cacheTags}
+│   ├── BlockMapperInterface.php             tagged service contract; mapAttributes($block)
+│   ├── IbexaPageMapper.php                  orchestrator (!tagged_iterator); returns PageDto
 │   ├── IbexaRichtextBlockMapper.php         priority 100; uses RichTextConverterExtension
 │   ├── IbexaEmbedBlockMapper.php            priority 100; {contentId, summary}
-│   ├── IbexaVideoBlockMapper.php            priority 100; {contentId, summary, videoUrl: null}
-│   ├── IbexaContentListBlockMapper.php      priority 100; {parentContentId, limit, contentTypes[], items: ContentSummaryDto[]}
 │   └── PassthroughBlockMapper.php           priority -1000 fallback
 ├── Twig/PageDtoExtension.php                twig fns `app_page_dto(content)` + `app_block_dto(blockValue)` + filter `app_json_for_script`
 ├── Repository/
-│   ├── PageRepositoryInterface.php          findByLocationId → ?PageRenderResult
-│   ├── PageRenderResult.php                 {PageDto dto, list<string> cacheTags}
+│   ├── PageRepositoryInterface.php          findByLocationId → ?PageDto
 │   └── IbexaPageRepository.php              only repo importing ibexa
-├── Controller/
-│   ├── Api/PageController.php               GET /api/v1/pages/{id} → json + xkey cache header
-│   └── PageBuilderPreviewController.php     GET /_preview/pages/{id} (DEV-ONLY; 404 elsewhere)
-└── Command/
-    └── PocSeedBlocksCommand.php             app:poc-seed-blocks — idempotent seed of video + contentlist blocks at location 72
+└── Controller/
+    ├── Api/PageController.php               GET /api/v1/pages/{id} → json
+    └── PageBuilderPreviewController.php     GET /_preview/pages/{id} (DEV-ONLY; 404 elsewhere)
 ```
 
 `services.yaml`: `App\Repository\PageRepositoryInterface: '@App\Repository\IbexaPageRepository'`. swap = config change. block mappers tagged via `app.block_mapper`.
@@ -99,7 +93,7 @@ templates/page_builder/
 ├── preview.html.twig                        standalone shell (page-data mode)
 ├── blocks/
 │   ├── _marker.html.twig                    shared base: empty marker `<div data-block-vue="…">` + sibling `<script data-block-data data-for="…">` data
-│   └── {richtext,embed,video,contentlist}.html.twig   one-liners: `{% include '_marker.html.twig' with {type: '…'} %}`
+│   └── {richtext,embed}.html.twig           one-liners: `{% include '_marker.html.twig' with {type: '…'} %}`
 └── fields/ezlandingpage.html.twig           extends parent, injects #page-data + bundle script tag
 
 config/packages/
@@ -118,7 +112,7 @@ frontend/
 │   ├── components/
 │   │   ├── PageRenderer.vue                 nuxt + standalone preview
 │   │   ├── EditorRoot.vue                   in-pipeline: walks markers, teleports per-marker
-│   │   ├── blocks/{index.ts, RichtextBlock.vue, EmbedBlock.vue, VideoBlock.vue, ContentListBlock.vue, UnknownBlock.vue}
+│   │   ├── blocks/{index.ts, RichtextBlock.vue, EmbedBlock.vue, UnknownBlock.vue}
 │   │   └── embeds/                          per-content-type embed view registry (mirrors ibexa's view-per-type)
 │   │       ├── index.ts                     resolveEmbedComponent(contentTypeIdentifier) → ImageEmbed | ArticleEmbed | GenericEmbed
 │   │       ├── ContentEmbed.vue             dispatches by contentTypeIdentifier
@@ -163,7 +157,7 @@ production exposes only **two** render surfaces:
 
 1. **dto endpoint**: `make page` (defaults to `ID=72`) — `PageDto` with the richtext block's `attributes.html`.
 2. **standalone preview** (dev): `https://ibexa-nuxt-ssr-poc.ddev.site/_preview/pages/72` — status bar + vue-rendered page.
-3. **in-pipeline editor — the headline result**: log into ibexa admin, edit "poc landing page" (location 72). richtext block markup is `<div data-block-vue="richtext">…vue-rendered…</div>` — `RichtextBlock.vue` mounted via `EditorRoot.vue` reading `#page-data`. byte-identical html to nuxt SSR.
+3. **in-pipeline editor**: log into ibexa admin, edit "poc landing page" (location 72). `RichtextBlock.vue` mounted via `EditorRoot.vue` reading `#page-data` (or sibling script).
 4. **nuxt SSR**: `make describe` shows the host port mapped to container 3000. view-source confirms server-rendered html.
 5. **ibexa overrides merged**: `make config-blocks` / `make config-fields`.
 
@@ -192,21 +186,19 @@ production exposes only **two** render surfaces:
 5. **ibexa stays unmodified.** uses ibexa's public php api (`ContentService`, `LocationService`, page-builder field-type contracts) and official extension points (template config + twig extension). no patches, forks, admin-ui mods, or undocumented internals.
 6. **ibexa template overrides DON'T use symfony's bundle-override path.** `templates/bundles/IbexaFieldTypePageBundle/...` is silently ignored. block templates register via `ibexa_fieldtype_page.blocks.<type>.views.<view>.template` (config-merge wins); field templates via `ibexa.system.<sa>.field_templates` priority list (higher wins).
 
-7. **cross-content resolution lives in the block mappers, eager.** blocks that reference other content (embed, video, contentlist) inject `App\Service\ContentSummarizer` and embed a flat `ContentSummaryDto` (`{id, locationId, name, contentTypeIdentifier, url, data}`) into their attributes. dto stays self-contained; renderers stay dumb; no client-side waterfall. n+1 trade is real (one `ContentService::loadContent` per reference) and accepted for the poc — production should batch via a side-table on `IbexaPageMapper` without changing dto shapes. broken references (NotFound/Unauthorized) yield `summary: null`; mappers never throw.
+7. **cross-content resolution lives in the block mappers, eager.** blocks that reference other content (embed) inject `App\Service\ContentSummarizer` and embed a flat `ContentSummaryDto` into their attributes. broken references (NotFound/Unauthorized) yield `summary: null`; mappers never throw.
 
-8. **per-content-type embed views, mirroring ibexa's view-per-type.** ibexa's stock embed delegates to `render(controller('ibexa_content:viewAction', { viewType: 'embed' }))` so each content type renders differently. ours splits the same concern in two:
-   - **server side**: `TypedDataExtractorInterface` (tagged `app.typed_data_extractor`) attaches per-type extras to `ContentSummaryDto.data` (e.g. `ImageDataExtractor` reads the `image` field's uri/alt/caption). adding a new content type = adding one extractor.
-   - **client side**: `frontend/app/components/embeds/` registry maps `contentTypeIdentifier` → vue component (`ImageEmbed`, `ArticleEmbed`, fallback `GenericEmbed`). `ContentEmbed.vue` dispatches by type. all four blocks (embed, video, contentlist items) feed through it.
+8. **per-content-type embed views, mirroring ibexa's view-per-type.** ours splits the concern in two:
+   - **server side**: `TypedDataExtractorInterface` (tagged `app.typed_data_extractor`) attaches per-type extras to `ContentSummaryDto.data` (e.g. `ImageDataExtractor` reads the `image` field's uri/alt/caption).
+   - **client side**: `frontend/app/components/embeds/` registry maps `contentTypeIdentifier` → vue component (`ImageEmbed`, `ArticleEmbed`, fallback `GenericEmbed`). `ContentEmbed.vue` dispatches by type.
 
-9. **http cache tags collected per-page, set as response header.** `MappingContext` is created per `IbexaPageMapper::map()` call and threaded through block mappers + `ContentSummarizer`. each touched contentId is recorded; `IbexaPageMapper` builds tags (`l{locationId}`, `c{contentId}`, ...) and returns `PageRenderResult{dto, cacheTags}`. `PageController` sets the `xkey` header (the varnish convention ibexa's own `TagHandler` uses). when an embedded content changes, varnish invalidates every page that referenced it — same model as ibexa's stock `ibexa_http_cache_tag_relation_*` twig functions, just hoisted to the response level instead of emitted per-block.
+9. **per-block sibling data + `MutationObserver` + WeakSet-based prepare for editor-iframe robustness.** each block twig template emits two siblings — an empty marker `<div data-block-vue="…" data-block-id="…">` and a sibling `<script type="application/json" data-block-data data-for="…">{ ...BlockDto }</script>` — via the shared `_marker.html.twig` partial.
 
-10. **per-block sibling data + `MutationObserver` + WeakSet-based prepare for editor-iframe robustness.** each block twig template emits two siblings — an empty marker `<div data-block-vue="…" data-block-id="…">` and a sibling `<script type="application/json" data-block-data data-for="…">{ ...BlockDto }</script>` — via the shared `_marker.html.twig` partial. data is computed via the `app_block_dto(_block_value)` twig fn → `IbexaPageMapper::mapStandaloneBlock`. **siblings, not nested**: keeps the marker pristine so vue's Teleport target has no other content to collide with. when ibexa drag-adds or republishes, ibexa re-renders the per-block twig (both siblings as one fragment) and inserts; `EditorRoot.vue`'s `MutationObserver` detects the added marker, reads the sibling script via `script[data-block-data][data-for="…"]`, teleports the right vue component.
+    **safeguards to avoid double-mount in the page-builder edit view**:
+    - **`prepareMarker(el)` clears each marker's children on first encounter** via a `WeakSet<HTMLElement>`.
+    - **v-for `:key` is `${blockId}-${WeakMap-tracked-elIdentity}`**, so a new DOM node for the same block id forces vue to unmount + remount cleanly.
 
-    **two non-obvious safeguards to avoid double-mount in the page-builder edit view** (where ibexa's react admin serializes the `c-pb-block-preview__inner` DOM and re-injects on interactions, capturing vue's prior `<article>` as part of the new marker's children):
-    - **`prepareMarker(el)` clears each marker's children on first encounter** via a `WeakSet<HTMLElement>` of "already prepared" els. wipes any stale `<article>` carried over from ibexa's serialize+reinject cycle before vue mounts. subsequent rescans (where vue's own children are legitimately inside) don't re-clean.
-    - **v-for `:key` is `${blockId}-${WeakMap-tracked-elIdentity}`**, so a new DOM node for the same block id forces vue to unmount + remount cleanly rather than leaving stale mounts in orphaned targets.
-
-    `editor.ts` is also idempotent (guards on `__editor-vue-root__` existing) so a re-eval of the bundle script doesn't double-mount. global `<script id="page-data">` is preserved as a fallback (covers blocks somehow missing sibling data) but the sibling source wins.
+    `editor.ts` is also idempotent (guards on `__editor-vue-root__` existing). global `<script id="page-data">` is preserved as a fallback.
 
 ## findings — costs of in-pipeline editor integration
 
@@ -222,7 +214,7 @@ production exposes only **two** render surfaces:
 
 **how each was found here, and where it'll show up in buerkert:**
 
-- 1, 2, 3, 4 surfaced through dragging blocks and republishing — the most basic editor interactions. they will all hit any vue-in-ibexa-admin integration that touches the page-builder edit view, not specifically anything about the poc's choice of richtext/embed/video/contentlist.
+- surfacing through dragging blocks and republishing — the most basic editor interactions. they will all hit any vue-in-ibexa-admin integration that touches the page-builder edit view, not specifically anything about the poc's choice of blocks.
 - 5 isn't a bug we fixed but a fact we noticed; flagged in case buerkert ships block components that need cross-instance state.
 
 **implications for the buerkert migration estimate:**
@@ -240,12 +232,11 @@ production exposes only **two** render surfaces:
 
 | item | status | note |
 |---|---|---|
-| css strategy (signal #3) | **pending decision** | (a) encore-as-authority + nuxt loads artifact, (b) shared scss source, (c) tailwind utilities. blocks render unstyled until decided. |
-| ~~second block type~~ | **done 2026-05-07** | richtext + embed + video + contentlist mapped end-to-end with cross-content resolution via `ContentSummarizer` → `ContentSummaryDto`. seeded by `make seed-blocks`. registry pattern scales linearly (bundle +5 kb for 3 blocks) |
-| cross-content resolution n+1 | **eager per-call (poc accept)** | `ContentSummarizer` loads each referenced content individually; for production, batch-resolve via `IbexaPageMapper` with the same dto shape — only the filler changes |
-| `ContentSummaryDto` not in openapi spec | **known gap** | nelmio rejects schema-only declarations on controller methods; the dto is only reachable via `BlockDto.attributes` (loosely typed). vue components hand-type a local `ContentSummary` interface. fix would be a separate schema-registration mechanism |
-| ~~per-content-type embed views~~ | **done 2026-05-07** | `TypedDataExtractorInterface` (tagged) + `ContentSummaryDto.data` (server) + `frontend/app/components/embeds/` registry (client). image content gets `ImageEmbed`; folder/landing_page → `GenericEmbed` fallback. add new types by adding one extractor + one vue component. |
-| ~~http cache tags on the response~~ | **done 2026-05-07** | `MappingContext` collects related contentIds across mappers; `PageRenderResult.cacheTags` returned from repository; `PageController` sets `xkey: l{loc} c{id} c{id} …` — varnish-style convention ibexa's `TagHandler` uses. |
-| ~~empty block on drag-add / after publish~~ | **done 2026-05-07** | per-block sibling data scripts (via shared `_marker.html.twig`) + `MutationObserver` in `EditorRoot.vue` + WeakMap-based stable mountKey + WeakSet-based `prepareMarker` (defends against ibexa's serialize+reinject in `c-pb-block-preview`). blocks render immediately without page reload, no double-render anywhere. |
-| ~~file content type extractor~~ | **done 2026-05-07** | `FileDataExtractor` + `FileEmbed.vue` for `file` content type → `{url, fileName, fileSize, mimeType}` |
+| css strategy (signal #3) | **pending decision** | encore-as-authority vs shared-scss vs tailwind. |
+| second block type | **done** | richtext + embed mapped end-to-end. |
+| cross-content resolution n+1 | **eager per-call** | production should batch-resolve via `IbexaPageMapper`. |
+| `ContentSummaryDto` in openapi | **known gap** | reachable via `BlockDto.attributes` (loosely typed). |
+| per-content-type embed views | **done** | `TypedDataExtractorInterface` + `frontend/app/components/embeds/`. |
+| editor robustness | **done** | sibling data + `MutationObserver` + `prepareMarker`. |
+| http cache tags / xkey | **pending** | `MappingContext` and response-level headers. |
 | port to buerkert_new | the actual goal | poc patterns transfer once #3 is decided and a second block is in |
