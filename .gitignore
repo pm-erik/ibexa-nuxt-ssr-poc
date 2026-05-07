@@ -27,3 +27,4 @@ yarn-error.log
 /.idea/
 /dual-rendering.md
 /page-builder-concept.md
+public/var/
