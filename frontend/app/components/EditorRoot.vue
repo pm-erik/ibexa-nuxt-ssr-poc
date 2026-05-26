@@ -17,14 +17,11 @@ interface Marker {
 const markers = ref<Marker[]>([])
 let pageDtoFallback: PageDto | null = null
 let observer: MutationObserver | null = null
+
+// marker el identity — detects DOM node swaps (ibexa serialize+reinject)
+// and prevents stacking vue renders on re-injected markers.
 const elIdMap = new WeakMap<HTMLElement, number>()
 let elIdCounter = 0
-// Track which marker els we've prepared. Ibexa's react admin may serialize
-// the page-builder block-preview DOM (capturing vue's already-mounted output)
-// and re-inject — that gives us a "fresh" marker el that already contains a
-// stale `<article>` from the previous mount. Clean it once before vue mounts
-// so we don't end up with two articles stacked. WeakSet means we only clean
-// each el on first sight; subsequent rescans don't wipe vue's own renders.
 const preparedEls = new WeakSet<HTMLElement>()
 
 function elIdentity(el: HTMLElement): number {
@@ -41,9 +38,10 @@ function prepareMarker(el: HTMLElement): void {
     return
   }
   preparedEls.add(el)
-  // Remove any non-script residue (e.g. vue article carried over via
-  // serialize+reinject). Sibling data scripts live OUTSIDE the marker, so
-  // there's nothing valuable inside to preserve.
+  // Ibexa's react admin may serialize the block-preview DOM (capturing vue's
+  // already-mounted output) and re-inject it — leaving a stale <article> inside
+  // a "fresh" marker el. Clear it once before vue mounts so renders don't stack.
+  // Sibling data scripts live outside the marker, so nothing valuable is lost.
   while (el.firstChild) {
     el.removeChild(el.firstChild)
   }
@@ -117,31 +115,15 @@ function rescan(): void {
   markers.value = next
 }
 
-function shouldRescan(record: MutationRecord): boolean {
-  const involves = (node: Node): boolean => {
-    if (!(node instanceof HTMLElement)) {
-      return false
-    }
-    if (node.matches?.('[data-block-vue]') || node.querySelector?.('[data-block-vue]')) {
-      return true
-    }
-    if (node.matches?.('script[data-block-data]') || node.querySelector?.('script[data-block-data]')) {
-      return true
-    }
-    return false
-  }
+function touchesBlock(node: Node): boolean {
+  return node instanceof HTMLElement && (
+    node.matches('[data-block-vue]') || !!node.querySelector('[data-block-vue]') ||
+    node.matches('script[data-block-data]') || !!node.querySelector('script[data-block-data]')
+  )
+}
 
-  for (const node of Array.from(record.addedNodes)) {
-    if (involves(node)) {
-      return true
-    }
-  }
-  for (const node of Array.from(record.removedNodes)) {
-    if (involves(node)) {
-      return true
-    }
-  }
-  return false
+function shouldRescan(record: MutationRecord): boolean {
+  return [...record.addedNodes, ...record.removedNodes].some(touchesBlock)
 }
 
 let pendingScan: number | null = null
