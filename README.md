@@ -1,38 +1,61 @@
-# Ibexa Flex website skeleton
+# ibexa nuxt ssr poc
 
-This is a Symfony Flex website skeleton allowing installation of all editions of
-[Ibexa DXP](https://www.ibexa.co/products) and Ibexa Open Source.
+proof-of-concept validating dual-rendering architecture for the buerkert symfony→nuxt migration.
 
-## Installation
+the core claim: ibexa's page builder can serve two render paths from a single shared `PageDto` — twig in the editor preview, nuxt ssr on the public site — with zero modifications to ibexa core.
 
-For installation instructions of Ibexa DXP see either
-[the official documentation](https://doc.ibexa.co/) or packages for specific editions:
-* [Ibexa Headless](https://github.com/ibexa/headless)
-* [Ibexa Experience](https://github.com/ibexa/experience)
-* [Ibexa Commerce](https://github.com/ibexa/commerce)
+## quick start
 
-Ibexa DXP is licensed under Ibexa Business Use License Agreement (Ibexa BUL) and requires
-a subscription. Learn more about [Ibexa DXP](https://www.ibexa.co/products).
+requires [ddev](https://ddev.readthedocs.io/en/stable/) and docker.
 
-For installation instructions of Ibexa Open Source see [ibexa/oss](https://github.com/ibexa/oss)
-package.
+```bash
+make up        # start ddev
+make install   # composer install + yarn install
+make nuxt      # start nuxt dev server (port 3000 on the ddev host)
+make urls      # print all useful urls
+```
 
-## COPYRIGHT
-Copyright (C) 1999-2025 Ibexa AS (formerly eZ Systems AS). All rights reserved.
+editor bundle (vue in ibexa admin):
+```bash
+make editor-dev    # vite --watch, for development
+make editor-build  # production build
+```
 
-## LICENSE
-This source code is available separately under the following licenses:
+run `make` (no args) for a full command list.
 
-A - Ibexa Business Use License Agreement (Ibexa BUL),
-version 2.3 or later versions (as license terms may be updated from time to time)
-Ibexa BUL is granted by having a valid Ibexa DXP (formerly eZ Platform Enterprise) subscription,
-as described at: https://www.ibexa.co/product
-For the full Ibexa BUL license text, please see:
-https://www.ibexa.co/software-information/licenses-and-agreements (latest version applies)
+## architecture
 
-AND
+```
+ibexa/symfony  →  IbexaPageMapper  →  PageDto  →  /api/v1/pages/{id}
+                                           │
+                          ┌────────────────┴────────────────┐
+                          ▼                                  ▼
+                  twig + editor bundle               nuxt ssr (public)
+                  (editor preview)                   PageRenderer.vue
+```
 
-B - GNU General Public License, version 2
-Grants an copyleft open source license with ABSOLUTELY NO WARRANTY. For the full GPL license text, please see:
-- LICENSE file placed in the root of this source code, or
-- https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+- `src/Dto/` — ibexa-free data shapes; the shared contract
+- `src/Mapper/` — converts ibexa content to dtos
+- `src/Repository/` — swappable backend binding (`PageRepositoryInterface`)
+- `frontend/app/components/` — shared vue components used by both render paths
+- `frontend/entries/editor.ts` — in-pipeline editor bundle (mutationobserver + vue teleport)
+- `templates/page_builder/` — twig overrides that inject the editor bundle and block markers
+
+## docs
+
+- [`ssr-poc-state.md`](./ssr-poc-state.md) — current state, endpoints, what's been validated
+- [`dual-rendering.md`](./dual-rendering.md) — the dual-rendering pattern in detail
+- [`page-builder-concept-v2.md`](./page-builder-concept-v2.md) — poc results and migration strategy
+- [`concept-buerkert.md`](./concept-buerkert.md) — buerkert-specific migration plan
+
+## vanilla ibexa skeleton files
+
+`assets/`, `webpack.config.js`, `ibexa.webpack.config*.js`, and the root `package.json` are part of the standard ibexa flex skeleton and are left untouched. they are **not used by this poc** — the poc build is entirely in `frontend/` (vite + nuxt). ignore them when reading the poc code.
+
+## openapi / typed client
+
+the symfony backend exposes an openapi spec at `/api/doc.json`. the frontend consumes it via a generated typed client:
+
+```bash
+make types   # regenerates frontend/app/types/api.d.ts from the live spec
+```
