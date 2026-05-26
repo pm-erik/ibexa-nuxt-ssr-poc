@@ -45,14 +45,12 @@ final class ContentSummarizer
         }
     }
 
-    public function summarizeContent(Content $content, ?Location $location = null, ?MappingContext $context = null): ?ContentSummaryDto
+    public function summarizeContent(Content $content, ?Location $location = null): ?ContentSummaryDto
     {
         $location ??= $this->loadMainLocation($content);
         if ($location === null) {
             return null;
         }
-
-        $context?->addRelatedContent((int) $content->id);
 
         $contentTypeIdentifier = $content->getContentType()->identifier;
 
