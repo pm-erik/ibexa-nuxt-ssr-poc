@@ -1,0 +1,1 @@
+This repository contains a Proof-of-Concept to connect Ibexa PageBuilder with Nuxt.js
